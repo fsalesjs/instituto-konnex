@@ -1282,9 +1282,25 @@ function renderStudent(){const p=$('studentArea');if(!p)return;const u=db.users.
   };
 
   window.login=async function(){
-    const email=kxSafeEmail($('loginEmail')?.value),pass=$('loginPassword')?.value||'';
-    if(!/^\S+@\S+\.\S+$/.test(email)||!pass){alert('Informe e-mail e senha.');return}
-    const {error}=await kxClient.auth.signInWithPassword({email,password:pass});
+    const loginValue=String($('loginEmail')?.value||'').trim();
+    const normalized=kxSafeEmail(loginValue);
+    const pass=$('loginPassword')?.value||'';
+    if(!loginValue||!pass){alert('Informe seus dados de acesso.');return}
+
+    // O acesso administrativo é deliberadamente discreto e usa a mesma tela pública.
+    // Ele não passa pelo Supabase: as credenciais administrativas permanecem no painel local.
+    if(normalized===kxSafeEmail(db.admin?.login)&&pass===db.admin?.password){
+      db.currentUser=null;
+      db.adminSession=true;
+      localStorage.setItem(KEY,JSON.stringify(db));
+      render();
+      go('admin');
+      return;
+    }
+
+    // Para alunos, continua valendo a autenticação normal por e-mail e senha.
+    if(!/^\S+@\S+\.\S+$/.test(normalized)){alert('E-mail ou senha incorretos.');return}
+    const {error}=await kxClient.auth.signInWithPassword({email:normalized,password:pass});
     if(error){alert('E-mail ou senha incorretos.');return}
     await kxLoadRemote();render();go(db.adminSession?'admin':'student');
   };
