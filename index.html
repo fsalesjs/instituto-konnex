@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Instituto Konnex 2.2</title>
+<style>
+:root{--primary:#5aa9e6;--primary-dark:#2f80c9;--pale:#eaf5ff;--bg:#f5f9fc;--ink:#18232d;--muted:#687582;--line:#dce5ec;--white:#fff;--danger:#c0392b;--shadow:0 8px 24px #18384f12}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{border:0;background:none;text-align:left;color:var(--primary-dark);font-weight:800;font-size:21px;padding:0}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:3px}.navlinks{display:flex;gap:4px;flex-wrap:wrap}.navlinks button{border:0;background:transparent;color:#4f5d69;padding:9px 10px;border-radius:8px}.navlinks button:hover{background:var(--pale);color:var(--primary-dark)}
+.wrap{max-width:1180px;margin:auto;padding:30px 22px}.page{display:none}.page.active{display:block}
+.hero{background:linear-gradient(135deg,#fff,var(--pale));border:1px solid #d8eafa;border-radius:20px;padding:48px 42px;box-shadow:var(--shadow);margin-bottom:24px}.hero h1{font-size:42px;max-width:780px;margin:0 0 12px}.hero p{max-width:760px;color:var(--muted);line-height:1.65}
+.btn{border:0;border-radius:9px;padding:10px 15px}.primary{background:var(--primary-dark);color:#fff}.secondary{background:#edf3f7;color:#28495d}.outline{background:#fff;border:1px solid #b9d8ee;color:var(--primary-dark)}.danger{background:#fde9e6;color:#9d2e24}.small{padding:7px 10px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px;box-shadow:0 2px 10px #18384f08}.card h3,.panel h2,.panel h3{margin-top:0}.muted{color:var(--muted);line-height:1.55}.cover{height:140px;border-radius:11px;background:linear-gradient(135deg,#e6f3fc,#f7fbfe);display:grid;place-items:center;color:#6e91a8;font-weight:700;margin-bottom:15px;overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover}
+.section{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:25px 0 15px}.section h2{margin:0}
+.tag{display:inline-block;background:var(--pale);color:#286995;border-radius:999px;padding:5px 9px;font-size:12px;margin:2px}.empty{text-align:center;padding:45px 20px;border:1px dashed #c9d6e0;border-radius:15px;background:#fff;color:var(--muted)}
+.adminhead{background:#18384f;color:#fff;border-radius:15px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}.adminhead .muted{color:#cbdde9}.adminnav{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin:16px 0}.adminnav button{text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:13px}.adminnav button:hover{background:var(--pale);border-color:#a9d0eb}
+.field{margin-bottom:15px}.field label{display:block;font-weight:700;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid #cbd6df;border-radius:8px;padding:10px;background:#fff}.field textarea{min-height:100px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.table{width:100%;border-collapse:collapse;background:#fff}.table th,.table td{padding:12px;border-bottom:1px solid #e7edf2;text-align:left;vertical-align:top}.table th{background:#f7f9fb;font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:6px}
+.module{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:#fbfdff}.modulehead{padding:14px;display:flex;justify-content:space-between;gap:10px;align-items:center}.lesson{border-top:1px solid var(--line);padding:12px 14px;display:flex;justify-content:space-between;gap:10px}.lesson small{color:var(--muted)}
+.progress{height:10px;background:#e7edf2;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--primary-dark)}
+.faq{background:#fff;border:1px solid var(--line);border-radius:10px;margin:9px 0}.faq button{width:100%;border:0;background:none;text-align:left;padding:15px;font-weight:700}.faq .answer{padding:0 15px 15px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0008;z-index:50;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{background:#fff;border-radius:16px;width:min(980px,100%);max-height:92vh;overflow:auto;padding:24px}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.certificate{width:100%;max-width:900px;aspect-ratio:1.414/1;margin:auto;background:#fff;border:10px solid #b9d9ef;outline:2px solid var(--primary);outline-offset:-18px;padding:55px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:15px;background-size:cover;background-position:center}.certificate h1{font-size:38px;letter-spacing:3px;color:#285e87;margin:0}.certificate .name{font-size:30px;font-weight:700}.certificate .course{font-size:20px;line-height:1.5}.certificate-pages{display:flex;flex-direction:column;gap:24px}.certificate-page{position:relative;width:100%;max-width:900px;aspect-ratio:1.414/1;margin:auto;background:#fff;border:10px solid #b9d9ef;outline:2px solid var(--primary);outline-offset:-18px;background-size:cover;background-position:center;overflow:hidden}.cert-el{position:absolute;transform:translate(-50%,-50%);white-space:pre-wrap;word-break:break-word;text-align:center;cursor:default;padding:4px}.cert-el.title{font-size:38px;font-weight:700;letter-spacing:3px;color:#285e87}.cert-el.name{font-size:30px;font-weight:700}.cert-el.text{font-size:20px;line-height:1.5}.cert-el.extra{font-size:15px;line-height:1.4}.cert-editor-canvas{position:relative;width:100%;max-width:900px;aspect-ratio:1.414/1;margin:12px auto;background:#fff;border:2px dashed #9fc7e3;background-size:cover;background-position:center;overflow:hidden}.cert-editor-canvas .cert-el{cursor:move;user-select:none;border:1px dashed transparent;min-width:40px;max-width:80%;padding:5px 8px;line-height:1.25}.cert-editor-canvas .cert-el.selected{border-color:#2f80c9;background:#eaf5ffcc;box-shadow:0 0 0 2px #5aa9e622}.cert-editor-canvas .cert-el:hover{border-color:#5aa9e6;background:#eaf5ff88}.cert-editor-note{font-size:12px;color:var(--muted);margin-top:6px}.cert-editor-tools{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-top:14px}.cert-editor-box{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fbfdff}.cert-editor-list{display:flex;flex-wrap:wrap;gap:6px}.cert-editor-list button.active{background:var(--primary-dark);color:#fff}.cert-editor-size{display:flex;gap:8px;align-items:center}.cert-editor-size input{width:90px}.certbar{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.notice{padding:13px 15px;border-radius:9px;background:var(--pale);color:#285b7f;line-height:1.5;margin-bottom:15px}
+.kpi{font-size:30px;margin:0 0 5px}.subnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:15px}.subnav button.active{background:var(--primary-dark);color:#fff}.sortable{cursor:grab}.content-editor{border:1px solid var(--line);border-radius:10px;background:#fff;margin:8px 0}.content-head{padding:12px;display:flex;justify-content:space-between;gap:10px;align-items:center}.content-body{border-top:1px solid var(--line);padding:12px}.checkline{display:flex;align-items:center;gap:8px;margin:8px 0}.checkline input{width:auto}.mini{font-size:12px;color:var(--muted)}
+@media(max-width:760px){.nav{align-items:flex-start;flex-direction:column}.hero{padding:34px 24px}.hero h1{font-size:31px}.two{grid-template-columns:1fr}.adminhead{align-items:flex-start;flex-direction:column}.certificate{padding:30px}.certificate h1{font-size:25px}.certificate .name{font-size:21px}.certificate .course{font-size:16px}}
+@media print{@page{size:A4 landscape;margin:0}body *{visibility:hidden}.certificate-pages,.certificate-pages *{visibility:visible}.certificate-pages{position:absolute;left:0;top:0;width:100%}.certificate-page{width:100vw;max-width:none;break-after:page;page-break-after:always;border:10px solid #b9d9ef}.certificate-page:last-child{break-after:auto;page-break-after:auto}}
+.link-btn{border:0;background:none;padding:0;color:var(--primary-dark);text-decoration:underline;cursor:pointer;font:inherit}.link-btn:hover{opacity:.8}</style>
+<style>#kxSimLibrary .row{border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0;background:#fff}</style></head>
+<body>
+<header class="header"><div class="nav">
+<button class="brand" onclick="go('home')"><span id="brandName">Instituto Konnex</span><small id="brandTag">Formação, conhecimento e prática</small></button>
+<div class="navlinks" id="publicNav"></div>
+</div></header>
+
+<main class="wrap">
+<section id="home" class="page active">
+<div class="hero"><h1 id="homeTitle">Formação, conhecimento e prática.</h1><p id="homeText"></p><button class="btn primary" onclick="go('courses')">Conhecer cursos</button></div>
+<div class="grid"><div class="card"><h3>📚 Cursos estruturados</h3><p class="muted">Organize módulos, aulas, materiais, atividades e simuladores.</p></div><div class="card"><h3>💻 Aprendizagem prática</h3><p class="muted">Integre ferramentas e simuladores aos conteúdos dos cursos.</p></div><div class="card"><h3>🎓 Certificação</h3><p class="muted">Prepare modelos personalizados e disponibilize certificados ao concluir os requisitos.</p></div></div>
+</section>
+<section id="courses" class="page"><div class="section"><div><h2>Cursos</h2><p class="muted">Somente cursos publicados aparecem no catálogo.</p></div></div><div id="catalog" class="grid"></div></section>
+<section id="about" class="page"><div class="hero"><h1 id="aboutTitle"></h1><p id="aboutText"></p></div><div class="panel"><h3>Contato</h3><p class="muted" id="contact"></p></div></section>
+<section id="faq" class="page"><div class="section"><h2>Perguntas frequentes</h2></div><div id="faqList"></div></section>
+<section id="validate" class="page"><div class="panel"><h2>Validar certificado</h2><p class="muted">Informe o código de verificação do certificado.</p><div class="two"><div class="field"><label>Código</label><input id="validationCode" placeholder="Ex.: KX-2026-000001"></div><div style="display:flex;align-items:end"><button class="btn primary" onclick="validateCert()">Validar certificado</button></div></div><div id="validationResult"></div></div></section>
+<section id="login" class="page">
+<div class="panel" style="max-width:560px;margin:auto">
+<h2>Entrar</h2>
+<p class="muted">Informe seus dados de acesso para entrar na plataforma.</p>
+<div class="field"><label>E-mail</label><input id="loginEmail" autocomplete="username"></div>
+<div class="field"><label>Senha</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+<button class="btn primary" onclick="login()">Entrar</button>
+<button class="btn outline" onclick="registerStudent()">Criar minha conta de aluno</button>
+<button class="btn outline" onclick="go('forgotPassword')">Esqueci minha senha</button>
+</div>
+</section>
+<section id="forgotPassword" class="page">
+<div class="panel" style="max-width:560px;margin:auto">
+<h2>Recuperar senha</h2>
+<p class="muted">Informe o e-mail cadastrado e defina uma nova senha para acessar sua conta.</p>
+<div class="field"><label>E-mail</label><input id="forgotEmail" type="email" autocomplete="email" placeholder="voce@exemplo.com"></div>
+<div class="two"><div class="field"><label>Nova senha</label><input id="forgotPasswordNew" type="password" autocomplete="new-password" placeholder="Mínimo de 6 caracteres"></div><div class="field"><label>Confirmar nova senha</label><input id="forgotPasswordConfirm" type="password" autocomplete="new-password"></div></div>
+<div class="actions"><button class="btn primary" onclick="recoverStudentPassword()">Redefinir senha</button><button class="btn outline" onclick="go('login')">Voltar para entrar</button></div>
+</div>
+</section>
+<section id="register" class="page">
+<div class="panel" style="max-width:620px;margin:auto">
+<h2>Criar conta de aluno</h2>
+<p class="muted" id="registerIntro">Crie sua conta para acessar os cursos, acompanhar seu progresso e receber seus certificados.</p>
+<div class="field"><label>Nome completo</label><input id="regName" autocomplete="name" placeholder="Seu nome completo"></div>
+<div class="field"><label>E-mail</label><input id="regEmail" type="email" autocomplete="email" placeholder="voce@exemplo.com"></div><div id="regEmailMsg" class="notice" style="display:none;margin-top:-6px"></div>
+<div class="two"><div class="field"><label>Senha</label><input id="regPassword" type="password" autocomplete="new-password" placeholder="Mínimo de 6 caracteres"></div><div class="field"><label>Confirmar senha</label><input id="regPassword2" type="password" autocomplete="new-password"></div></div>
+<div class="checkline"><input id="regTerms" type="checkbox"><span>Confirmo que os dados informados são meus e quero criar uma conta de aluno.</span></div>
+<div class="actions"><button class="btn primary" onclick="finishStudentRegistration()">Criar conta e continuar</button><button class="btn outline" onclick="go('login')">Já tenho uma conta</button></div>
+</div>
+</section>
+<section id="student" class="page"><div class="section"><div><h2 id="studentGreeting">Área do aluno</h2><p class="muted">Cursos, progresso, perfil e certificados.</p></div></div><div id="studentArea"></div></section>
+<section id="admin" class="page">
+<div class="adminhead"><div><strong>Painel administrativo — Instituto Konnex</strong><div class="muted">Site, cursos, conteúdos, alunos, certificados e relatórios.</div></div><div class="actions"><button class="btn" style="background:#fff;color:#18384f" onclick="adminTab('dashboard')">Visão geral</button><button class="btn" style="background:#fff;color:#8b2c24" onclick="adminLogout()">Sair da administração</button></div></div>
+<div class="adminnav"><button onclick="adminTab('dashboard')">📊 Visão geral</button><button onclick="adminTab('site')">🌐 Site</button><button onclick="adminTab('courses')">📚 Cursos</button><button onclick="adminTab('students')">🎓 Alunos</button><button onclick="adminTab('reports')">📈 Relatórios</button><button onclick="adminTab('cert')">📜 Certificados</button><button onclick="adminTab('simulators')">🧩 Ferramentas</button><button onclick="adminTab('files')">🗂 Arquivos</button><button onclick="adminTab('faq')">❓ FAQ</button><button onclick="adminTab('settings')">⚙️ Configurações</button></div>
+<div id="adminPanel"></div>
+</section>
+</main>
+<footer><span id="footerName">Instituto Konnex</span> • <span id="footerTag">Formação, conhecimento e prática</span></footer>
+
+<div id="modal" class="modal"><div class="modalbox"><div class="modalhead"><h2 id="modalTitle"></h2><button class="btn secondary" onclick="closeModal()">Fechar</button></div><div id="modalBody"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+/* ===== Biblioteca de simuladores Konnex ===== */
+const KX_SIM_DB='konnex_simulators_v1';
+let kxSimDBPromise=null;
+let kxSimulators=[];
+function kxOpenSimDB(){
+  if(kxSimDBPromise)return kxSimDBPromise;
+  kxSimDBPromise=new Promise((resolve,reject)=>{
+    if(!window.indexedDB){reject(new Error('IndexedDB indisponível'));return}
+    const r=indexedDB.open(KX_SIM_DB,1);
+    r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains('files'))db.createObjectStore('files',{keyPath:'id'})};
+    r.onsuccess=()=>resolve(r.result);
+    r.onerror=()=>reject(r.error||new Error('Não foi possível abrir a biblioteca'));
+  });
+  return kxSimDBPromise;
+}
+async function kxListSimulators(){
+  const db=await kxOpenSimDB();
+  const files=await new Promise((resolve,reject)=>{
+    const tx=db.transaction('files','readonly'),req=tx.objectStore('files').getAll();
+    req.onsuccess=()=>resolve(req.result||[]);
+    req.onerror=()=>reject(req.error);
+  });
+  kxSimulators=files.sort((a,b)=>String(a.name).localeCompare(String(b.name),'pt-BR'));
+  return kxSimulators;
+}
+async function kxSaveSimulator(file){
+  if(!file || !/\.html?$/i.test(file.name))throw new Error('Selecione um arquivo HTML.');
+  const data=await file.text();
+  if(!/<html[\s>]/i.test(data)&&! /<!doctype\s+html/i.test(data))throw new Error('O arquivo não parece ser um HTML completo.');
+  const rec={id:'sim_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),name:file.name,data,size:file.size,updatedAt:new Date().toISOString()};
+  const db=await kxOpenSimDB();
+  await new Promise((resolve,reject)=>{
+    const tx=db.transaction('files','readwrite');tx.objectStore('files').put(rec);
+    tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
+  });
+  return rec;
+}
+async function kxGetSimulator(id){
+  const db=await kxOpenSimDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction('files','readonly'),req=tx.objectStore('files').get(id);
+    req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);
+  });
+}
+async function kxDeleteSimulator(id){
+  const db=await kxOpenSimDB();
+  await new Promise((resolve,reject)=>{
+    const tx=db.transaction('files','readwrite');tx.objectStore('files').delete(id);
+    tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
+  });
+}
+function kxSimLabel(id){const f=kxSimulators.find(x=>x.id===id);return f?f.name:'Simulador'}
+async function kxOpenStoredSimulator(id){
+  const rec=await kxGetSimulator(id);
+  if(!rec){alert('Simulador não encontrado na biblioteca local.');return}
+  const url=URL.createObjectURL(new Blob([rec.data],{type:'text/html;charset=utf-8'}));
+  window.open(url,'_blank','noopener,noreferrer');setTimeout(()=>URL.revokeObjectURL(url),120000);
+}
+async function kxDownloadStoredSimulator(id){
+  const rec=await kxGetSimulator(id);
+  if(!rec){alert('Simulador não encontrado na biblioteca local.');return}
+  const url=URL.createObjectURL(new Blob([rec.data],{type:'text/html;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download=rec.name||'simulador.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);
+}
+async function kxAddSimulatorFiles(input){
+  const files=[...(input?.files||[])];if(!files.length)return;
+  const errors=[];let added=0;
+  for(const file of files){try{await kxSaveSimulator(file);added++}catch(e){errors.push(file.name+': '+e.message)}}
+  input.value='';await kxRefreshSimulatorLibrary();
+  if(errors.length)alert('Alguns arquivos não foram adicionados:\n'+errors.join('\n'));else alert(added+' simulador(es) adicionado(s) à biblioteca.');
+}
+async function kxRefreshSimulatorLibrary(){
+  try{await kxListSimulators()}catch(e){kxSimulators=[]}
+  const target=$('kxSimLibrary');if(target)target.innerHTML=kxSimulatorLibraryHTML();
+}
+function kxSimulatorLibraryHTML(){
+  if(!kxSimulators.length)return '<div class="empty">Nenhum simulador cadastrado. Clique em “Adicionar HTML” para começar.</div>';
+  return kxSimulators.map(f=>`<div class="row"><div><strong>${esc(f.name)}</strong><div class="muted">${Math.max(1,Math.round(f.size/1024))} KB</div></div><div class="actions"><button class="btn small primary" onclick="kxOpenStoredSimulator('${f.id}')">Abrir</button><button class="btn small outline" onclick="kxDownloadStoredSimulator('${f.id}')">Baixar</button><button class="btn small danger" onclick="kxRemoveSimulator('${f.id}')">Excluir</button></div></div>`).join('');
+}
+async function kxRemoveSimulator(id){if(!confirm('Excluir este simulador da biblioteca local?'))return;await kxDeleteSimulator(id);await kxRefreshSimulatorLibrary()}
+function kxSelectSimulator(i,j){
+  if(!kxSimulators.length){alert('Adicione primeiro um simulador na Biblioteca de simuladores.');return}
+  const body=`<div class="notice">Escolha um simulador já adicionado à biblioteca.</div>${kxSimulators.map(f=>`<div class="row"><div><strong>${esc(f.name)}</strong><div class="muted">${Math.max(1,Math.round(f.size/1024))} KB</div></div><button class="btn small primary" onclick="draftContent(${i},${j}).url='kxsim:${f.id}';courseEditorTab('content','${window._courseDraft.id}');closeModal()">Selecionar</button></div>`).join('')}`;
+  openModal('Selecionar simulador',body);
+}
+
+
+const KEY='konnex_v2_1';
+const defaultDB={
+ settings:{name:'Instituto Konnex',tag:'Formação, conhecimento e prática',homeTitle:'Formação, conhecimento e prática.',homeText:'Cursos organizados para reunir conhecimento, materiais, atividades e ferramentas práticas em um só ambiente.',aboutTitle:'Sobre o Instituto Konnex',aboutText:'O Instituto Konnex é uma plataforma de formação preparada para reunir cursos, conteúdos e recursos de aprendizagem.',contact:'',primary:'#5aa9e6',menu:[{label:'Início',page:'home',active:true},{label:'Cursos',page:'courses',active:true},{label:'Sobre',page:'about',active:true},{label:'Perguntas frequentes',page:'faq',active:true},{label:'Validar certificado',page:'validate',active:true},{label:'Entrar',page:'login',active:true}]},
+ courses:[],
+ faqs:[{q:'Como acesso um curso?',a:'Na plataforma real, o aluno terá uma conta e verá os cursos aos quais possui acesso.'},{q:'Quando o certificado fica disponível?',a:'A regra de conclusão será configurada pelo administrador de cada curso.'}],
+ users:[{id:'demo',name:'Aluno de Demonstração',email:'aluno@konnex.local',password:'123456',courses:[],enrollments:[],progress:{},certificates:[]}],
+ admin:{login:'admin',password:'Konnex@123'},
+ adminSession:false,
+ certTemplates:[{id:'default',name:'Modelo Konnex',title:'CERTIFICADO',text:'Certificamos que {{NOME_DO_ALUNO}} concluiu o curso {{NOME_DO_CURSO}}, com carga horária de {{CARGA_HORARIA}}, em {{DATA_CONCLUSAO}}.',extra:'Instituto Konnex\\nCódigo de verificação: {{CODIGO}}',background:''}],
+ currentUser:null
+};
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||defaultDB;
+if(!db.settings.menu)db.settings.menu=defaultDB.settings.menu;
+// O acesso administrativo usa a mesma tela de login e não aparece como opção pública.
+db.settings.menu=(db.settings.menu||[]).filter(x=>x.page!=='student');
+if(!db.settings.menu.some(x=>x.page==='login'))db.settings.menu.push({label:'Entrar',page:'login',active:true});
+if(!db.users)db.users=defaultDB.users;
+if(!db.certTemplates)db.certTemplates=defaultDB.certTemplates;
+(db.certTemplates||[]).forEach(t=>{t.page2Title=t.page2Title||'INFORMAÇÕES DO CURSO';t.page2Text=t.page2Text||'Conteúdo programático\n{{MODULOS}}';t.page2Extra=t.page2Extra||'Informações adicionais do curso';t.layout=t.layout||{p1:{title:{x:50,y:12},name:{x:50,y:38},text:{x:50,y:56},extra:{x:50,y:82}},p2:{title:{x:50,y:12},text:{x:50,y:35},extra:{x:50,y:82}}}});
+if(!db.admin)db.admin={...defaultDB.admin};
+if(typeof db.adminSession!=='boolean')db.adminSession=false;
+db.courses=(db.courses||[]).map(normalizeCourse);
+const $=id=>document.getElementById(id);
+const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const uidLegacy=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+function normalizeCourse(c){
+ c.modules=(c.modules||[]).map(m=>({id:m.id||uid(),title:m.title||'Módulo',description:m.description||'',active:m.active!==false,order:m.order||0,contents:(m.contents||m.lessons||[]).map(l=>({id:l.id||uid(),title:l.title||'Conteúdo',type:l.type||'Aula',description:l.description||'',url:l.url||'',cover:l.cover||'',active:l.active!==false,required:l.required!==false,finalActivity:!!l.finalActivity,prerequisiteId:l.prerequisiteId||'',order:l.order||0,done:!!l.done}))}));
+ c.status=c.status||'Rascunho';c.completionRule=c.completionRule||'all';c.requiredModules=c.requiredModules||[];c.accessType=c.accessType||'permanent';c.accessDays=Number(c.accessDays)||null;c.priceType=c.priceType||(c.price?'paid':'free');c.certificateTemplateId=c.certificateTemplateId||'default';c.archived=!!c.archived;c.demoProgress=c.demoProgress||0;c.enrollments=c.enrollments||[];return c
+}
+
+function nowISO(){return new Date().toISOString()}
+function uid(prefix='id'){return prefix+'_'+Math.random().toString(36).slice(2,9)+'_'+Date.now().toString(36).slice(-5)}
+function daysFromNow(days){let d=new Date();d.setDate(d.getDate()+Number(days||0));return d.toISOString()}
+function parseDate(v){let d=v?new Date(v):null;return d&&!isNaN(d)?d:null}
+function activeContents(course){
+ return (course.modules||[]).flatMap(m=>(m.contents||[]).filter(c=>c.active!==false));
+}
+function requiredContents(course){
+ return activeContents(course).filter(c=>c.required!==false&&String(c.type||'').toLowerCase()!=='simulador');
+}
+function allModuleIds(course){return (course.modules||[]).filter(m=>m.active!==false).map(m=>m.id)}
+function finalActivities(course){
+ return activeContents(course).filter(c=>String(c.type||'').toLowerCase()==='atividade' && (c.finalActivity||false));
+}
+function progressRecord(userId,courseId){
+ let u=db.users.find(x=>x.id===userId);
+ if(!u)return null;
+ u.progress=u.progress||{};
+ u.progress[courseId]=u.progress[courseId]||{completed:[],opened:[],startedAt:null,lastAccess:null,completedAt:null,moduleCompleted:[]};
+ return u.progress[courseId];
+}
+function isEnrollmentActive(user,course){
+ if(!user||!course)return false;
+ let e=(user.enrollments||[]).find(x=>x.courseId===course.id);
+ if(!e)return false;
+ if(e.status==='blocked')return false;
+ if(e.expiresAt && parseDate(e.expiresAt) && parseDate(e.expiresAt)<new Date())return false;
+ return true;
+}
+function getEnrollment(user,course){
+ return (user?.enrollments||[]).find(x=>x.courseId===course.id)||null;
+}
+function ensureEnrollment(user,course){
+ user.enrollments=user.enrollments||[];
+ user.courses=user.courses||[];
+ let e=getEnrollment(user,course);
+ if(!e){
+   e={courseId:course.id,enrolledAt:nowISO(),status:'active',expiresAt:course.accessType==='period'?daysFromNow(course.accessDays||30):null};
+   user.enrollments.push(e);
+ }
+ if(!user.courses.includes(course.id))user.courses.push(course.id);
+ return e;
+}
+function getCompletionRule(course){return course.completionRule||'all'}
+function completionState(course,user){
+ if(!course||!user)return {percent:0,complete:false,done:0,total:0,rule:getCompletionRule(course)};
+ let p=progressRecord(user.id,course.id), rule=getCompletionRule(course);
+ let req=requiredContents(course), done=req.filter(c=>p.completed.includes(c.id)).length;
+ let percent=req.length?Math.round(done/req.length*100):0;
+ let complete=false;
+ if(rule==='all') complete=req.length>0&&done===req.length;
+ else if(rule==='final') complete=req.length>0&&done===req.length&&finalActivities(course).every(c=>p.completed.includes(c.id));
+ else if(rule==='modules'){
+   let ids=course.requiredModules&&course.requiredModules.length?course.requiredModules:allModuleIds(course);
+   complete=ids.length>0&&ids.every(mid=>{
+     let m=(course.modules||[]).find(x=>x.id===mid);
+     if(!m)return false;
+     let rc=(m.contents||[]).filter(c=>c.active!==false&&c.required!==false&&String(c.type||'').toLowerCase()!=='simulador');
+     return rc.length>0&&rc.every(c=>p.completed.includes(c.id));
+   });
+ } else if(rule==='manual') complete=!!p.manualComplete;
+ return {percent,complete,done,total:req.length,rule};
+}
+function maybeIssueCertificate(course,user){
+ let st=completionState(course,user);
+ if(!st.complete)return false;
+ let p=progressRecord(user.id,course.id);
+ if(p.completedAt)return false;
+ p.completedAt=nowISO();
+ p.certificateId=certificateCode(course,user);
+ user.certificates=user.certificates||[];
+ if(!user.certificates.some(c=>c.code===p.certificateId)){
+   user.certificates.push({code:p.certificateId,courseId:course.id,userId:user.id,issuedAt:p.completedAt});
+ }
+ return true;
+}
+function canOpenContent(course,content,user){
+ if(!isEnrollmentActive(user,course))return false;
+ let prereq=content.prerequisiteId;
+ if(prereq){
+   let p=progressRecord(user.id,course.id);
+   return p.completed.includes(prereq);
+ }
+ return true;
+}
+function contentProgress(course,user,content){
+ let p=progressRecord(user.id,course.id);
+ return p.completed.includes(content.id)?'completed':(p.opened.includes(content.id)?'started':'not_started');
+}
+function markContentOpened(course,content,user){
+ if(!user)return;
+ let p=progressRecord(user.id,course.id);
+ p.startedAt=p.startedAt||nowISO();
+ p.lastAccess=nowISO();
+ if(!p.opened.includes(content.id))p.opened.push(content.id);
+}
+function markContentCompleted(course,content,user){
+ if(!user)return;
+ let p=progressRecord(user.id,course.id);
+ markContentOpened(course,content,user);
+ if(!p.completed.includes(content.id))p.completed.push(content.id);
+ maybeIssueCertificate(course,user);
+}
+function persist(){localStorage.setItem(KEY,JSON.stringify(db));render()}
+function go(id){
+ if(id==='admin'&&!db.adminSession){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$('login').classList.add('active');return}
+ if(id==='student'&&!db.currentUser){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$('login').classList.add('active');return}
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+ $(id).classList.add('active');
+ if(id==='admin')adminTab('dashboard');
+ render()
+}
+function applySettings(){document.documentElement.style.setProperty('--primary',db.settings.primary||'#5aa9e6');$('brandName').textContent=db.settings.name;$('brandTag').textContent=db.settings.tag;$('homeTitle').textContent=db.settings.homeTitle;$('homeText').textContent=db.settings.homeText;$('aboutTitle').textContent=db.settings.aboutTitle;$('aboutText').textContent=db.settings.aboutText;$('contact').textContent=db.settings.contact||'Informações de contato podem ser configuradas no painel administrativo.';$('footerName').textContent=db.settings.name;$('footerTag').textContent=db.settings.tag;renderNav()}
+function renderNav(){let items=(db.settings.menu||[]).filter(x=>x.active&&x.page!=='register');let logged=!!db.currentUser&&!db.adminSession;let nav=items.filter(x=>!(logged&&x.page==='login')).map(x=>`<button onclick="go('${esc(x.page)}')">${esc(x.label)}</button>`).join('');if(logged)nav+=`<button onclick="go('student')">Área do aluno</button><button onclick="logout()">Sair</button>`;$('publicNav').innerHTML=nav}
+$('publicNav').innerHTML += '';
+function render(){applySettings();let pub=db.courses.filter(c=>c.status==='Publicado'&&!c.archived);$('catalog').innerHTML=pub.length?pub.map(courseCard).join(''):'<div class="empty" style="grid-column:1/-1">Nenhum curso publicado ainda.</div>';renderStudent();$('faqList').innerHTML=db.faqs.length?db.faqs.map((f,i)=>`<div class="faq"><button onclick="toggleFaq(${i})">${esc(f.q)} <span style="float:right">+</span></button><div id="faq${i}" class="answer hidden">${esc(f.a)}</div></div>`).join(''):'<div class="empty">Nenhuma pergunta cadastrada.</div>'}
+function toggleFaq(i){$('faq'+i).classList.toggle('hidden')}
+function courseCard(c){return `<div class="card"><div class="cover">${c.cover?`<img src="${esc(c.cover)}">`:'CAPA DO CURSO'}</div><span class="tag">${esc(c.modality||'Online')}</span><span class="tag">${esc(c.hours||'')}</span><span class="tag">${c.priceType==='paid'?'Pago':'Gratuito'}</span><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc||'')}</p><p><strong>${esc(c.price||'Gratuito')}</strong></p><button class="btn primary" onclick="viewCourse('${c.id}',false)">Ver curso</button></div>`}
+function currentProgress(course,userId){
+ let u=userId?db.users.find(x=>x.id===userId):db.users.find(x=>x.id===db.currentUser);
+ if(!u)return 0;
+ return completionState(course,u).percent;
+}
+
+function enrollmentStatusLabel(e){
+ if(!e)return 'Sem matrícula';
+ if(e.status==='blocked')return 'Bloqueada';
+ if(e.expiresAt&&parseDate(e.expiresAt)&&parseDate(e.expiresAt)<new Date())return 'Expirada';
+ return 'Ativa';
+}
+function renderStudent(){
+ let p=$('studentArea'); if(!p)return;
+ let u=db.users.find(x=>x.id===db.currentUser);
+ if(!u){
+   p.innerHTML=`<div class="panel"><h2>Área do aluno</h2><p class="muted">Entre com seu login para acessar seus cursos.</p><button class="btn primary" onclick="go('login')">Entrar</button></div>`;
+   return;
+ }
+ let enrolled=(u.enrollments||[]).map(e=>db.courses.find(c=>c.id===e.courseId)).filter(Boolean);
+ let cards=enrolled.map(c=>{
+   let st=completionState(c,u),e=getEnrollment(u,c),expired=e&&e.expiresAt&&parseDate(e.expiresAt)&&parseDate(e.expiresAt)<new Date();
+   return `<div class="card"><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc||'')}</p><div class="progress"><span style="width:${st.percent}%"></span></div><p>${st.percent}% concluído ${expired?'<span class="badge danger">Acesso expirado</span>':''}</p><button class="btn primary" onclick="openCourseForStudent('${c.id}')">${expired?'Ver curso':'Continuar'}</button></div>`;
+ }).join('');
+ p.innerHTML=`<div class="panel"><div class="actions" style="justify-content:space-between"><div><h2>Área do aluno</h2><p class="muted">Bem-vindo, ${esc(u.name)}.</p></div><button class="btn outline" onclick="logout()">Sair</button></div>${cards||'<div class="notice">Você ainda não possui cursos matriculados.</div>'}<div class="panel" style="margin-top:15px"><h3>Certificados</h3>${(u.certificates||[]).map(c=>`<div class="row"><span>${esc((db.courses.find(x=>x.id===c.courseId)||{}).name||'Curso')}</span><button class="btn small" onclick="printCertificate('${c.code}')">Imprimir</button></div>`).join('')||'<p class="muted">Nenhum certificado emitido.</p>'}</div></div>`;
+}
+function logout(){db.currentUser=null;db.adminSession=false;persist();go('home')}
+function openCourseForStudent(courseId){
+ let u=db.users.find(x=>x.id===db.currentUser),c=db.courses.find(x=>x.id===courseId);
+ if(!u||!c){go('login');return}
+ if(!isEnrollmentActive(u,c)){alert('Seu acesso a este curso não está ativo.');return}
+ renderCourseView(courseId);
+}
+
+function studentTab(t){let u=db.currentUser?db.users.find(x=>x.id===db.currentUser):db.users[0];if(t==='courses')$('studentSub').innerHTML=studentCourses((u.courses||[]).map(id=>db.courses.find(c=>c.id===id)).filter(Boolean),u);if(t==='profile')$('studentSub').innerHTML=`<div class="panel"><h3>Meu perfil</h3><div class="field"><label>Nome</label><input id="pname" value="${esc(u.name)}"></div><div class="field"><label>E-mail</label><input value="${esc(u.email)}" disabled></div><button class="btn primary" onclick="saveProfile()">Salvar perfil</button></div>`;if(t==='certs')$('studentSub').innerHTML=certificateHistory(u)}
+function studentCourses(list,u){return list.length?`<div class="grid">${list.map(c=>{let p=currentProgress(c,u.id);return `<div class="card"><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc||'')}</p><div class="progress"><i style="width:${p}%"></i></div><p class="muted">${p}% concluído</p><button class="btn primary" onclick="viewCourse('${c.id}',true)">Continuar curso</button>${p===100&&c.certificateTemplateId?` <button class="btn outline" onclick="showCertificate('${c.id}','${u.id}')">Certificado</button>`:''}</div>`}).join('')}</div>`:'<div class="empty">Você ainda não possui cursos. Acesse o catálogo para se matricular.</div>'}
+function saveProfile(){let u=db.users.find(x=>x.id===db.currentUser)||db.users[0];u.name=$('pname').value.trim()||u.name;persist();go('student')}
+function certificateHistory(u){let rows=[];(u.certificates||[]).forEach(v=>{let c=db.courses.find(x=>x.id===v.courseId);if(c)rows.push(`<tr><td>${esc(c.name)}</td><td>${esc(v.issuedAt?new Date(v.issuedAt).toLocaleDateString('pt-BR'):'-')}</td><td><button class="btn small outline" onclick="showCertificate('${c.id}','${u.id}')">Abrir</button></td></tr>`)});return `<div class="panel"><h3>Meus certificados</h3>${rows.length?`<table class="table"><tr><th>Curso</th><th>Conclusão</th><th>Certificado</th></tr>${rows.join('')}</table>`:'<div class="empty">Nenhum certificado emitido.</div>'}</div>`}
+function enroll(courseId){
+ let course=db.courses.find(x=>x.id===courseId),user=db.users.find(x=>x.id===db.currentUser);
+ if(!course)return;
+ if(!user){go('login');return}
+ if(course.status!=='Publicado'){alert('Este curso ainda não está publicado.');return}
+ let existing=getEnrollment(user,course);
+ if(existing&&isEnrollmentActive(user,course)){alert('Você já está matriculado neste curso.');return}
+ if(existing&&existing.status==='blocked'){alert('Sua matrícula está bloqueada.');return}
+ let e=ensureEnrollment(user,course);
+ e.status='active';
+ e.enrolledAt=e.enrolledAt||nowISO();
+ e.expiresAt=course.accessMode==='period'?daysFromNow(course.accessDays||30):null;
+ persist();
+ alert(course.price>0?'Matrícula registrada em modo demonstração. Em uma versão online, o pagamento será confirmado antes da liberação.':'Matrícula realizada com sucesso.');
+ renderStudent();
+ renderCatalog();
+}
+
+function viewCourse(id,student){let c=db.courses.find(x=>x.id===id);if(!c)return;let u=db.users.find(x=>x.id===db.currentUser)||db.users[0],enrolled=!!getEnrollment(u,c)&&isEnrollmentActive(u,c);let body=`<div class="cover">${c.cover?`<img src="${esc(c.cover)}">`:'CAPA DO CURSO'}</div><span class="tag">${esc(c.modality||'Online')}</span><span class="tag">${esc(c.hours||'')}</span><span class="tag">${c.priceType==='paid'?'Pago':'Gratuito'}</span><h2>${esc(c.name)}</h2><p class="muted">${esc(c.desc||'')}</p><p><b>Público-alvo:</b> ${esc(c.audience||'Não informado')}</p>${!student&&!enrolled?`<div class="notice">${c.priceType==='paid'?`Valor: <b>${esc(c.price||'')}</b>`:'Curso gratuito'} <button class="btn primary small" onclick="enroll('${c.id}')">${c.priceType==='paid'?'Inscrever-se':'Matricular-se'}</button></div>`:''}<h3>Conteúdo programático</h3>${(c.modules||[]).filter(m=>m.active).length?c.modules.filter(m=>m.active).sort((a,b)=>a.order-b.order).map((m,mi)=>`<div class="module"><div class="modulehead"><span><strong>Módulo ${mi+1}: ${esc(m.title)}</strong><br><small>${esc(m.description||'')}</small></span><small>${(m.contents||[]).length} conteúdo(s)</small></div>${(m.contents||[]).filter(x=>x.active).sort((a,b)=>a.order-b.order).map(l=>`<div class="lesson"><span>${icon(l.type)} ${esc(l.title)}<br><small>${esc(l.type)} ${l.required?'• Obrigatório':''}</small></span>${student&&enrolled?`<button class="btn small ${isDone(c,u.id,l.id)?'outline':'secondary'}" onclick="completeContent('${id}','${l.id}')">${isDone(c,u.id,l.id)?'Concluído':'Concluir'}</button>`:''}</div>`).join('')}</div>`).join(''):'<p class="muted">Nenhum módulo cadastrado ainda.</p>'}<h3>Materiais</h3>${(c.materials||[]).length?(c.materials||[]).map(x=>`<div class="lesson">📎 ${esc(x)}</div>`).join(''):'<p class="muted">Nenhum material cadastrado.</p>'}${c.sim?`<div class="panel"><h3>🧩 Ferramenta prática</h3><button class="btn primary" onclick="openSimulator('${esc(c.sim)}')">Abrir simulador/ferramenta</button></div>`:''}${student&&enrolled?`<div class="panel"><h3>Progresso: ${currentProgress(c,u.id)}%</h3><div class="progress"><i style="width:${currentProgress(c,u.id)}%"></i></div>${currentProgress(c,u.id)===100?`<p class="notice">Curso concluído. O certificado está disponível.</p><button class="btn primary" onclick="showCertificate('${c.id}','${u.id}')">🎓 Abrir certificado</button>`:''}</div>`:''}`;openModal(c.name,body)}
+function icon(t){return ({Vídeo:'▶️',PDF:'📄',Atividade:'📝',Simulador:'🧩',Aula:'📘'})[t]||'📘'}
+function isDone(c,uid,id){let u=db.users.find(x=>x.id===uid);return !!(u?.progress?.[c.id]?.completed||[]).includes(id)}
+function completeContent(courseId,contentId){
+ let user=db.users.find(x=>x.id===db.currentUser),course=db.courses.find(x=>x.id===courseId);
+ if(!user||!course){alert('Faça login para continuar.');return}
+ let content=activeContents(course).find(c=>c.id===contentId);
+ if(!content){alert('Conteúdo não encontrado.');return}
+ if(!canOpenContent(course,content,user)){alert('Este conteúdo ainda está bloqueado. Conclua o conteúdo anterior primeiro.');return}
+ markContentCompleted(course,content,user);
+ persist();
+ renderStudent();
+ renderCourseView(courseId);
+}
+
+function certificateCode(c,u){return 'KX-'+new Date().getFullYear()+'-'+String(Math.abs(hash(c.id+'-'+u.id))).slice(-6).padStart(6,'0')}
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h)+s.charCodeAt(i)|0;return h}
+function showCertificate(cid,uid){let c=db.courses.find(x=>x.id===cid),u=db.users.find(x=>x.id===uid)||db.users[0];let t=db.certTemplates.find(x=>x.id===c.certificateTemplateId)||db.certTemplates[0];openModal('Certificado',certificateHTML(u.name,c,t,u))}
+function certificateHTML(name,c,t,u){let code=certificateCode(c,u);let text=t.text.replaceAll('{{NOME_DO_ALUNO}}',name).replaceAll('{{NOME_DO_CURSO}}',c.name).replaceAll('{{CARGA_HORARIA}}',c.hours||'').replaceAll('{{DATA_CONCLUSAO}}',new Date().toLocaleDateString('pt-BR')).replaceAll('{{CODIGO}}',code);return `<div class="certificate" ${t.background?`style="background-image:url('${esc(t.background)}')"`:''}><h1>${esc(t.title)}</h1><div class="name">${esc(name)}</div><div class="course">${esc(text)}</div><div>${esc(t.extra.replaceAll('{{CODIGO}}',code))}</div></div><div class="certbar"><button class="btn primary" onclick="printCertificateView()">Imprimir / Salvar como PDF</button></div>`}
+function validateCert(){let code=$('validationCode').value.trim();if(!code){$('validationResult').innerHTML='<div class="notice">Digite um código.</div>';return}let found=null,foundUser=null;db.users.forEach(u=>(u.certificates||[]).forEach(v=>{if(v.code===code){found=db.courses.find(c=>c.id===v.courseId);foundUser=u}}));$('validationResult').innerHTML=found?`<div class="notice"><b>Certificado válido.</b><br>Aluno: ${esc(foundUser.name)}<br>Curso: ${esc(found.name)}<br>Carga horária: ${esc(found.hours||'-')}<br>Conclusão: ${esc(((foundUser.certificates.find(x=>x.courseId===found.id)||{}).issuedAt?new Date(foundUser.certificates.find(x=>x.courseId===found.id).issuedAt).toLocaleDateString('pt-BR'):'-'))}</div>`:'<div class="notice" style="background:#fff1ef;color:#8e3027">Certificado não encontrado.</div>'}
+function login(){
+ let login=$('loginEmail').value.trim(),pass=$('loginPassword').value;
+ if(login===db.admin.login&&pass===db.admin.password){
+   db.currentUser=null;
+   db.adminSession=true;
+   persist();
+   go('admin');
+   return;
+ }
+ let u=db.users.find(x=>x.email===login&&x.password===pass);
+ if(!u){alert('Login ou senha incorretos.');return}
+ db.currentUser=u.id;
+ db.adminSession=false;
+ persist();
+ go('student');
+}
+function adminLogout(){
+ db.adminSession=false;
+ db.currentUser=null;
+ persist();
+ go('home');
+}
+function saveAdminCredentials(){
+ let current=$('adminCurrentPassword').value;
+ let newLogin=$('adminNewLogin').value.trim();
+ let newPass=$('adminNewPassword').value;
+ let confirm=$('adminNewPassword2').value;
+ if(current!==db.admin.password){alert('A senha administrativa atual está incorreta.');return}
+ if(!newLogin){alert('Informe o novo login administrativo.');return}
+ if(newPass.length<6){alert('A nova senha deve ter pelo menos 6 caracteres.');return}
+ if(newPass!==confirm){alert('A confirmação da nova senha não confere.');return}
+ db.admin.login=newLogin;
+ db.admin.password=newPass;
+ persist();
+ $('adminCurrentPassword').value='';
+ $('adminNewLogin').value='';
+ $('adminNewPassword').value='';
+ $('adminNewPassword2').value='';
+ alert('Credenciais administrativas alteradas com sucesso.');
+}
+function openModal(title,body){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modal').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.querySelector('.modalbox')?.scrollTo({top:0,behavior:'instant'}),0)}
+function closeModal(){$('modal').classList.remove('open');document.body.style.overflow=''}
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+function adminTab(tab){let p=$('adminPanel');
+if(tab==='files'){p.innerHTML=mediaLibraryHTML();return}
+if(tab==='dashboard')p.innerHTML=`<div class="grid"><div class="card"><p class="kpi">${db.courses.filter(c=>!c.archived).length}</p><p class="muted">Cursos ativos</p></div><div class="card"><p class="kpi">${db.courses.filter(c=>c.status==='Publicado'&&!c.archived).length}</p><p class="muted">Cursos publicados</p></div><div class="card"><p class="kpi">${db.users.length}</p><p class="muted">Alunos</p></div><div class="card"><p class="kpi">${db.users.reduce((n,u)=>n+(u.certificates||[]).length,0)}</p><p class="muted">Certificados emitidos</p></div></div><div class="panel" style="margin-top:18px"><h3>Fluxo da plataforma</h3><p class="muted">Visitante → curso → inscrição → acesso → conteúdo → progresso → conclusão → certificado → validação.</p></div>`;
+if(tab==='site')p.innerHTML=siteEditor();
+if(tab==='courses')p.innerHTML=coursesAdmin();
+if(tab==='students')p.innerHTML=studentsAdmin();
+if(tab==='reports')p.innerHTML=reportsAdmin();
+if(tab==='cert')p.innerHTML=certAdmin();
+if(tab==='simulators')p.innerHTML=`<div class="section"><div><h2>Biblioteca de simuladores</h2><p class="muted">Adicione arquivos HTML diretamente do computador. Não é necessário cadastrar o simulador previamente.</p></div><label class="btn primary" style="cursor:pointer">+ Adicionar HTML<input id="kxSimUpload" type="file" accept=".html,text/html" multiple hidden></label></div><div class="panel"><div class="notice">Os simuladores ficam armazenados localmente nesta instalação do navegador e permanecem independentes dos conteúdos dos cursos.</div><div id="kxSimLibrary">${kxSimulatorLibraryHTML()}</div></div>`;
+if(tab==='faq')p.innerHTML=`<div class="section"><h2>Perguntas frequentes</h2><button class="btn primary" onclick="faqEditor()">+ Nova pergunta</button></div>${db.faqs.length?db.faqs.map((f,i)=>`<div class="card" style="margin:9px 0"><b>${esc(f.q)}</b><p class="muted">${esc(f.a)}</p><div class="actions"><button class="btn small secondary" onclick="faqEditor(${i})">Editar</button><button class="btn small danger" onclick="deleteFaq(${i})">Excluir</button></div></div>`).join(''):'<div class="empty">Nenhuma pergunta.</div>'}`;
+if(tab==='settings')p.innerHTML=`<div class="panel">
+<h2>Configurações</h2>
+<div class="notice">Esta versão continua sendo um protótipo local. Os dados ficam no navegador. O acesso administrativo agora possui credenciais próprias e pode ser alterado por você a qualquer momento.</div>
+<div class="panel" style="margin-top:15px">
+<h3>Acesso administrativo</h3>
+<p class="muted">Login atual: <b>${esc(db.admin.login)}</b></p>
+<div class="field"><label>Senha administrativa atual</label><input id="adminCurrentPassword" type="password" autocomplete="current-password"></div>
+<div class="two">
+<div class="field"><label>Novo login</label><input id="adminNewLogin" value="${esc(db.admin.login)}" autocomplete="username"></div>
+<div class="field"><label>Nova senha</label><input id="adminNewPassword" type="password" autocomplete="new-password"></div>
+</div>
+<div class="field"><label>Confirmar nova senha</label><input id="adminNewPassword2" type="password" autocomplete="new-password"></div>
+<button class="btn primary" onclick="saveAdminCredentials()">Salvar novas credenciais</button>
+</div>
+<div class="panel" style="margin-top:15px">
+<h3>Dados do protótipo</h3>
+<p class="muted">A restauração apaga os dados locais e retorna às configurações iniciais, inclusive às credenciais administrativas padrão.</p>
+<button class="btn danger" onclick="if(confirm('Apagar todos os dados desta versão?')){localStorage.removeItem(KEY);location.reload()}">Restaurar protótipo</button>
+</div>
+</div>`}
+function siteEditor(){return `<div class="panel"><h2>Editor do site</h2><div class="two"><div class="field"><label>Nome</label><input id="sn" value="${esc(db.settings.name)}"></div><div class="field"><label>Subtítulo</label><input id="stag" value="${esc(db.settings.tag)}"></div></div><div class="field"><label>Título da página inicial</label><input id="shTitle" value="${esc(db.settings.homeTitle)}"></div><div class="field"><label>Texto da página inicial</label><textarea id="shText">${esc(db.settings.homeText)}</textarea></div><div class="field"><label>Título da página Sobre</label><input id="saTitle" value="${esc(db.settings.aboutTitle)}"></div><div class="field"><label>Texto da página Sobre</label><textarea id="saText">${esc(db.settings.aboutText)}</textarea></div><div class="field"><label>Contato</label><textarea id="scontact">${esc(db.settings.contact)}</textarea></div><div class="field"><label>Cor principal</label><input id="sprimary" type="color" value="${esc(db.settings.primary)}"></div><h3>Menu público</h3>${db.settings.menu.map((m,i)=>`<div class="checkline"><input type="checkbox" id="menu${i}" ${m.active?'checked':''}><span>${esc(m.label)}</span></div>`).join('')}<button class="btn primary" onclick="saveSite()">Salvar alterações</button></div>`}
+function saveSite(){Object.assign(db.settings,{name:$('sn').value,tag:$('stag').value,homeTitle:$('shTitle').value,homeText:$('shText').value,aboutTitle:$('saTitle').value,aboutText:$('saText').value,contact:$('scontact').value,primary:$('sprimary').value});db.settings.menu.forEach((m,i)=>m.active=$('menu'+i).checked);persist();adminTab('site')}
+function coursesAdmin(){return `<div class="section"><h2>Cursos</h2><button class="btn primary" onclick="courseEditor()">+ Novo curso</button></div>${db.courses.length?`<table class="table"><tr><th>Curso</th><th>Status</th><th>Estrutura</th><th>Ações</th></tr>${db.courses.map(c=>`<tr><td><b>${esc(c.name)}</b><br><small>${c.priceType==='paid'?esc(c.price):'Gratuito'} • ${esc(c.accessType)}</small></td><td>${esc(c.archived?'Arquivado':c.status)}</td><td>${c.modules.length} módulo(s), ${c.modules.reduce((n,m)=>n+m.contents.length,0)} conteúdo(s)</td><td><div class="actions"><button class="btn small secondary" onclick="courseEditor('${c.id}')">Editar</button><button class="btn small secondary" onclick="toggleCourse('${c.id}')">${c.status==='Publicado'?'Despublicar':'Publicar'}</button><button class="btn small outline" onclick="archiveCourse('${c.id}')">${c.archived?'Desarquivar':'Arquivar'}</button><button class="btn small danger" onclick="deleteCourse('${c.id}')">Excluir</button></div></td></tr>`).join('')}</table>`:'<div class="empty">Nenhum curso cadastrado.</div>'}`}
+function toggleManualCompletion(userId,courseId){
+ let u=db.users.find(x=>x.id===userId),c=db.courses.find(x=>x.id===courseId);if(!u||!c)return;
+ let p=progressRecord(userId,courseId);p.manualComplete=!p.manualComplete;
+ if(p.manualComplete)maybeIssueCertificate(c,u);else{p.completedAt=null;p.certificateId=null;u.certificates=(u.certificates||[]).filter(x=>x.courseId!==courseId)}
+ persist();adminTab('students');
+}
+function studentsAdmin(){
+ return `<div class="section"><h2>Alunos</h2></div><table class="table"><tr><th>Nome</th><th>E-mail</th><th>Cursos</th><th>Progresso</th><th>Certificados</th><th>Ações</th></tr>${db.users.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${(u.courses||[]).length}</td><td>${(u.courses||[]).map(id=>{let c=db.courses.find(x=>x.id===id);return c?`${esc(c.name)}: ${currentProgress(c,u.id)}%`:''}).filter(Boolean).join('<br>')}</td><td>${(u.certificates||[]).length}</td><td>${(u.courses||[]).map(id=>{let c=db.courses.find(x=>x.id===id);return c&&c.completionRule==='manual'?`<button class="btn small secondary" onclick="toggleManualCompletion('${u.id}','${c.id}')">${u.progress?.[c.id]?.manualComplete?'Reabrir':'Concluir'}</button>`:''}).filter(Boolean).join(' ')||'—'}</td></tr>`).join('')}</table>`;
+}
+function renderCourseView(courseId){
+ let course=db.courses.find(c=>c.id===courseId),user=db.users.find(x=>x.id===db.currentUser);
+ if(!course||!user)return;
+ if(!isEnrollmentActive(user,course)){alert('Seu acesso não está ativo.');return}
+ let st=completionState(course,user);
+ let modules=(course.modules||[]).filter(m=>m.active!==false).sort((a,b)=>a.order-b.order).map((m,mi)=>{
+   let contents=(m.contents||[]).filter(c=>c.active!==false).sort((a,b)=>a.order-b.order).map(c=>{
+     let state=contentProgress(course,user,c),blocked=!canOpenContent(course,c,user);
+     let label=String(c.type||'').toLowerCase()==='simulador'?'Ferramenta':(state==='completed'?'Concluído':(state==='started'?'Continuar':'Abrir'));
+     let button=blocked?'<button class="btn small" disabled>Bloqueado</button>':`<button class="btn small ${state==='completed'?'secondary':'primary'}" onclick="studentOpenContent('${course.id}','${c.id}')">${label}</button>`;
+     return `<div class="row"><div><strong>${esc(c.title||'Conteúdo')}</strong><div class="muted">${esc(c.type||'Aula')}${String(c.type||'').toLowerCase()==='simulador'?'':(c.required!==false?' • obrigatório':' • opcional')}</div></div>${button}</div>`;
+   }).join('');
+   return `<div class="panel"><h3>Módulo ${mi+1}: ${esc(m.title||'Módulo')}</h3>${contents||'<p class="muted">Sem conteúdos.</p>'}</div>`;
+ }).join('');
+ $('studentArea').innerHTML=`<div class="panel"><div class="actions" style="justify-content:space-between"><div><h2>${esc(course.name)}</h2><p class="muted">${esc(course.desc||'')}</p></div><button class="btn outline" onclick="renderStudent()">Voltar</button></div><div class="progress"><span style="width:${st.percent}%"></span></div><p><strong>${st.percent}%</strong> concluído</p>${modules}${st.complete?'<div class="notice">Curso concluído. Seu certificado está disponível na área de certificados.</div>':''}</div>`;
+}
+async function openSimulator(url){
+ let clean=String(url||'').trim();
+ if(!clean){alert('Nenhum simulador foi configurado.');return}
+ if(clean.startsWith('kxsim:')){await kxOpenStoredSimulator(clean.slice(6));return}
+ if(!/^(https?:\/\/|file:\/\/)/i.test(clean))clean='https://'+clean;
+ window.open(clean,'_blank','noopener,noreferrer');
+}
+function studentOpenContent(courseId,contentId){
+ let course=db.courses.find(c=>c.id===courseId),user=db.users.find(x=>x.id===db.currentUser),content=activeContents(course||{}).find(c=>c.id===contentId);
+ if(!course||!user||!content)return;
+ if(!canOpenContent(course,content,user)){alert('Este conteúdo está bloqueado.');return}
+ markContentOpened(course,content,user);
+ let type=String(content.type||'').toLowerCase();
+ let body='';
+ if(type==='simulador'){
+   if(content.url){
+     const stored=String(content.url).startsWith('kxsim:');
+     const simId=stored?String(content.url).slice(6):'';
+     const simName=stored?kxSimLabel(simId):content.url;
+     body=`<div class="panel"><h3>🧩 ${esc(content.title||'Simulador')}</h3><p>${esc(content.description||'Use o simulador para realizar a atividade prática.')}</p><p class="muted">${esc(simName)}</p><button class="btn primary" onclick="${stored?`kxOpenStoredSimulator('${esc(simId)}')`:`openSimulator('${esc(content.url)}')`}">Abrir simulador</button></div>`;
+   }else{
+     body=`<div class="notice">Este conteúdo está configurado como simulador, mas ainda não possui um arquivo associado.</div>`;
+   }
+ }else if(type==='vídeo'||type==='video'){
+   body=content.url?`<div class="embed"><iframe src="${esc(content.url)}" title="${esc(content.title)}" allowfullscreen></iframe></div>`:`<div class="notice">Nenhum vídeo foi configurado.</div>`;
+ }else if(type==='pdf'||type==='material'){
+   body=content.url?`<iframe src="${esc(content.url)}" style="width:100%;height:520px;border:1px solid #ddd;border-radius:10px"></iframe>`:`<div class="notice">Nenhum PDF/material foi configurado.</div>`;
+ }else{
+   body=`<div class="contentText">${esc(content.description||'Conteúdo da aula.')}</div>`;
+ }
+ let done=contentProgress(course,user,content)==='completed';
+ let p=$('studentArea');
+ p.innerHTML=`<div class="panel"><button class="btn outline" onclick="renderCourseView('${course.id}')">← Voltar ao curso</button><h2 style="margin-top:18px">${esc(content.title)}</h2><p class="muted">${esc(content.type||'Aula')}</p>${body}<div class="actions" style="margin-top:18px"><button class="btn primary" onclick="completeContent('${course.id}','${content.id}')">${done?'Concluído':'Marcar como concluído'}</button></div></div>`;
+ persist();
+}
+
+/* ===== Correção funcional consolidada: editores e painéis ===== */
+let _courseDraft=null;
+
+function courseEditor(id){
+  let c=id?db.courses.find(x=>x.id===id):null;
+  _courseDraft=c?JSON.parse(JSON.stringify(c)):normalizeCourse({
+    id:uid('course'),name:'Novo curso',desc:'',status:'Rascunho',modality:'Online',hours:'',
+    audience:'',priceType:'free',price:'',accessType:'permanent',accessDays:null,
+    completionRule:'all',requiredModules:[],certificateTemplateId:'default',modules:[]
+  });
+  _courseDraft.modules=_courseDraft.modules||[];
+  _courseDraft.modules.forEach((m,mi)=>{m.id=m.id||uid('mod');m.order=mi+1;m.contents=m.contents||[];m.contents.forEach((x,xi)=>{x.id=x.id||uid('content');x.order=xi+1})});
+  courseEditorTab('general');
+  openModal(id?'Editar curso':'Novo curso', courseEditorHTML());
+}
+function courseEditorHTML(){
+  let c=_courseDraft;
+  return `<div class="subnav">
+    <button class="btn small secondary" onclick="courseEditorTab('general')">Informações</button>
+    <button class="btn small secondary" onclick="courseEditorTab('structure')">Estrutura</button>
+    <button class="btn small secondary" onclick="courseEditorTab('rules')">Conclusão e acesso</button>
+  </div><div id="courseEditorBody"></div>`;
+}
+function courseEditorTab(tab){
+  if(!_courseDraft)return;
+  let c=_courseDraft, b=$('modalBody');
+  if(!b)return;
+  let body='';
+  if(tab==='general'){
+    body=`<div class="two">
+      <div class="field"><label>Nome do curso</label><input id="ceName" value="${esc(c.name||'')}"></div>
+      <div class="field"><label>Modalidade</label><select id="ceMod">${['Online','Presencial','Híbrido'].map(x=>`<option ${c.modality===x?'selected':''}>${x}</option>`).join('')}</select></div>
+    </div>
+    <div class="field"><label>Descrição</label><textarea id="ceDesc">${esc(c.desc||'')}</textarea></div>
+    <div class="two">
+      <div class="field"><label>Carga horária</label><input id="ceHours" value="${esc(c.hours||'')}"></div>
+      <div class="field"><label>Público-alvo</label><input id="ceAudience" value="${esc(c.audience||'')}"></div>
+    </div>
+    <div class="two">
+      <div class="field"><label>Tipo</label><select id="cePriceType"><option value="free" ${c.priceType!=='paid'?'selected':''}>Gratuito</option><option value="paid" ${c.priceType==='paid'?'selected':''}>Pago</option></select></div>
+      <div class="field"><label>Valor</label><input id="cePrice" value="${esc(c.price||'')}"></div>
+    </div>
+    <div class="field"><label>Imagem/capa (URL)</label><input id="ceCover" value="${esc(c.cover||'')}"></div>
+    <button class="btn primary" onclick="saveCourseDraft()">Salvar curso</button>`;
+  } else if(tab==='structure'){
+    body=`<div class="section"><h3>Estrutura do curso</h3><button class="btn primary small" onclick="addDraftModule()">+ Módulo</button></div>
+    <div id="draftModules">${(_courseDraft.modules||[]).map((m,i)=>draftModuleHTML(m,i)).join('')||'<div class="empty">Nenhum módulo. Adicione o primeiro módulo.</div>'}</div>
+    <div class="actions" style="margin-top:15px"><button class="btn primary" onclick="saveCourseDraft()">Salvar curso</button></div>`;
+  } else {
+    body=`<div class="two">
+      <div class="field"><label>Regra de conclusão</label><select id="ceRule">
+        <option value="all" ${c.completionRule==='all'?'selected':''}>Todos os conteúdos obrigatórios</option>
+        <option value="final" ${c.completionRule==='final'?'selected':''}>Conteúdos obrigatórios + atividade final</option>
+        <option value="modules" ${c.completionRule==='modules'?'selected':''}>Módulos obrigatórios</option>
+        <option value="manual" ${c.completionRule==='manual'?'selected':''}>Conclusão manual pelo administrador</option>
+      </select></div>
+      <div class="field"><label>Acesso</label><select id="ceAccess"><option value="permanent" ${c.accessType!=='period'?'selected':''}>Permanente</option><option value="period" ${c.accessType==='period'?'selected':''}>Por período</option></select></div>
+    </div>
+    <div class="field"><label>Dias de acesso (se for por período)</label><input id="ceDays" type="number" min="1" value="${esc(c.accessDays||30)}"></div>
+    <div class="field"><label>Modelo de certificado</label><select id="ceCert">${db.certTemplates.map(t=>`<option value="${esc(t.id)}" ${c.certificateTemplateId===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+    <div class="notice">Simuladores não entram no cálculo de conclusão. Conteúdos marcados como obrigatórios entram na regra escolhida.</div>
+    <button class="btn primary" onclick="saveCourseDraft()">Salvar curso</button>`;
+  }
+  if(tab==='general'){
+    b.innerHTML=`<div class="modalhead"><h2>Informações do curso</h2><button class="btn secondary" onclick="closeModal()">Fechar</button></div>${body}`;
+  } else b.innerHTML=`<div class="modalhead"><h2>${tab==='structure'?'Estrutura do curso':'Conclusão e acesso'}</h2><button class="btn secondary" onclick="closeModal()">Fechar</button></div>${body}`;
+}
+function draftModuleHTML(m,i){
+  return `<div class="module"><div class="modulehead"><div><strong>Módulo ${i+1}</strong></div><div class="actions"><button class="btn small secondary" onclick="moveDraftModule(${i},-1)">↑</button><button class="btn small secondary" onclick="moveDraftModule(${i},1)">↓</button><button class="btn small danger" onclick="removeDraftModule(${i})">Excluir</button></div></div>
+  <div class="content-body"><div class="field"><label>Título</label><input id="dmTitle${i}" value="${esc(m.title||'')}"></div><div class="field"><label>Descrição</label><textarea id="dmDesc${i}">${esc(m.description||'')}</textarea></div>
+  <div class="section"><h4>Conteúdos</h4><button class="btn small primary" onclick="addDraftContent(${i})">+ Conteúdo</button></div>
+  <div>${(m.contents||[]).map((x,j)=>draftContentHTML(i,j,x)).join('')||'<p class="muted">Nenhum conteúdo neste módulo.</p>'}</div>
+  </div></div>`;
+}
+function draftContentHTML(i,j,x){
+  return `<div class="content-editor"><div class="content-head"><strong>${j+1}. ${esc(x.title||'Conteúdo')}</strong><div class="actions"><button class="btn small secondary" onclick="moveDraftContent(${i},${j},-1)">↑</button><button class="btn small secondary" onclick="moveDraftContent(${i},${j},1)">↓</button><button class="btn small danger" onclick="removeDraftContent(${i},${j})">Excluir</button></div></div>
+  <div class="content-body"><div class="two"><div class="field"><label>Título</label><input id="dcTitle${i}_${j}" value="${esc(x.title||'')}"></div><div class="field"><label>Tipo</label><select id="dcType${i}_${j}">${['Aula','Vídeo','PDF','Atividade','Simulador'].map(t=>`<option ${x.type===t?'selected':''}>${t}</option>`).join('')}</select></div></div>
+  <div class="field"><label>Descrição / texto</label><textarea id="dcDesc${i}_${j}">${esc(x.description||'')}</textarea></div>
+  <div class="field"><label>URL / arquivo</label><input id="dcUrl${i}_${j}" value="${esc(x.url||'')}"></div>
+  <div class="checkline"><input id="dcReq${i}_${j}" type="checkbox" ${x.required!==false?'checked':''}><span>Conteúdo obrigatório</span></div>
+  <div class="checkline"><input id="dcFinal${i}_${j}" type="checkbox" ${x.finalActivity?'checked':''}><span>Atividade final</span></div>
+  ${String(x.type||'').toLowerCase()==='simulador'?`<button class="btn small outline" onclick="kxSelectSimulator(${i},${j})">Selecionar simulador da biblioteca</button>`:''}
+  </div></div>`;
+}
+function syncDraftFields(){
+  if(!_courseDraft)return;
+  const v=id=>$(id)?.value??'';
+  if($('ceName')){_courseDraft.name=v('ceName').trim();_courseDraft.desc=v('ceDesc');_courseDraft.modality=v('ceMod');_courseDraft.hours=v('ceHours');_courseDraft.audience=v('ceAudience');_courseDraft.priceType=v('cePriceType');_courseDraft.price=v('cePrice');_courseDraft.cover=v('ceCover');}
+  if($('ceRule')){_courseDraft.completionRule=v('ceRule');_courseDraft.accessType=v('ceAccess');_courseDraft.accessDays=Number(v('ceDays'))||null;_courseDraft.certificateTemplateId=v('ceCert')||'default';}
+  (_courseDraft.modules||[]).forEach((m,i)=>{
+    m.title=$(`dmTitle${i}`)?.value||m.title;m.description=$(`dmDesc${i}`)?.value||'';
+    (m.contents||[]).forEach((x,j)=>{x.title=$(`dcTitle${i}_${j}`)?.value||x.title;x.type=$(`dcType${i}_${j}`)?.value||x.type;x.description=$(`dcDesc${i}_${j}`)?.value||'';x.url=$(`dcUrl${i}_${j}`)?.value||'';x.required=!!$(`dcReq${i}_${j}`)?.checked;x.finalActivity=!!$(`dcFinal${i}_${j}`)?.checked;});
+  });
+}
+function saveCourseDraft(){
+  syncDraftFields();
+  if(!_courseDraft.name.trim()){alert('Informe o nome do curso.');return}
+  _courseDraft.modules.forEach((m,i)=>{m.order=i+1;m.contents.forEach((x,j)=>x.order=j+1)});
+  _courseDraft.status=_courseDraft.status||'Rascunho';
+  _courseDraft.archived=!!_courseDraft.archived;
+  let idx=db.courses.findIndex(x=>x.id===_courseDraft.id);
+  if(idx>=0)db.courses[idx]=normalizeCourse(_courseDraft);else db.courses.push(normalizeCourse(_courseDraft));
+  persist();closeModal();adminTab('courses');
+}
+function addDraftModule(){syncDraftFields();_courseDraft.modules.push({id:uid('mod'),title:'Novo módulo',description:'',active:true,order:_courseDraft.modules.length+1,contents:[]});courseEditorTab('structure')}
+function removeDraftModule(i){syncDraftFields();if(confirm('Excluir este módulo e seus conteúdos?')){_courseDraft.modules.splice(i,1);courseEditorTab('structure')}}
+function moveDraftModule(i,d){syncDraftFields();let n=i+d;if(n<0||n>=_courseDraft.modules.length)return;[_courseDraft.modules[i],_courseDraft.modules[n]]=[_courseDraft.modules[n],_courseDraft.modules[i]];courseEditorTab('structure')}
+function addDraftContent(i){syncDraftFields();let m=_courseDraft.modules[i];m.contents.push({id:uid('content'),title:'Novo conteúdo',type:'Aula',description:'',url:'',active:true,required:true,finalActivity:false,prerequisiteId:'',order:m.contents.length+1});courseEditorTab('structure')}
+function removeDraftContent(i,j){syncDraftFields();if(confirm('Excluir este conteúdo?')){_courseDraft.modules[i].contents.splice(j,1);courseEditorTab('structure')}}
+function moveDraftContent(i,j,d){syncDraftFields();let a=_courseDraft.modules[i].contents,n=j+d;if(n<0||n>=a.length)return;[a[j],a[n]]=[a[n],a[j]];courseEditorTab('structure')}
+
+function toggleCourse(id){let c=db.courses.find(x=>x.id===id);if(!c)return;c.status=c.status==='Publicado'?'Rascunho':'Publicado';persist();adminTab('courses')}
+function archiveCourse(id){let c=db.courses.find(x=>x.id===id);if(!c)return;c.archived=!c.archived;persist();adminTab('courses')}
+function deleteCourse(id){if(!confirm('Excluir este curso definitivamente?'))return;db.courses=db.courses.filter(x=>x.id!==id);db.users.forEach(u=>{u.courses=(u.courses||[]).filter(x=>x!==id);u.enrollments=(u.enrollments||[]).filter(x=>x.courseId!==id);if(u.progress)delete u.progress[id];u.certificates=(u.certificates||[]).filter(x=>x.courseId!==id)});persist();adminTab('courses')}
+
+function reportsAdmin(){
+  const courses=db.courses||[], users=db.users||[];
+  const rows=courses.map(c=>{let enroll=users.filter(u=>(u.enrollments||[]).some(e=>e.courseId===c.id)).length;let done=users.filter(u=>{let e=getEnrollment(u,c);return e&&completionState(c,u).complete}).length;return `<tr><td>${esc(c.name)}</td><td>${enroll}</td><td>${done}</td><td>${enroll?Math.round(done/enroll*100):0}%</td><td>${users.reduce((n,u)=>n+(u.certificates||[]).filter(x=>x.courseId===c.id).length,0)}</td></tr>`}).join('');
+  return `<div class="section"><div><h2>Relatórios</h2><p class="muted">Indicadores consolidados da plataforma.</p></div><button class="btn primary" onclick="exportReportsCSV()">Exportar CSV</button></div>
+  <div class="grid"><div class="card"><p class="kpi">${courses.filter(c=>!c.archived).length}</p><p class="muted">Cursos ativos</p></div><div class="card"><p class="kpi">${users.length}</p><p class="muted">Alunos</p></div><div class="card"><p class="kpi">${users.reduce((n,u)=>n+(u.certificates||[]).length,0)}</p><p class="muted">Certificados</p></div><div class="card"><p class="kpi">${users.reduce((n,u)=>n+(u.enrollments||[]).length,0)}</p><p class="muted">Matrículas</p></div></div>
+  <div class="panel" style="margin-top:18px"><table class="table"><tr><th>Curso</th><th>Matrículas</th><th>Concluintes</th><th>Conclusão</th><th>Certificados</th></tr>${rows||'<tr><td colspan="5">Nenhum curso.</td></tr>'}</table></div>`;
+}
+function exportReportsCSV(){
+  let lines=[['Curso','Matrículas','Concluintes','Percentual','Certificados']];
+  (db.courses||[]).forEach(c=>{let e=db.users.filter(u=>getEnrollment(u,c)).length,d=db.users.filter(u=>getEnrollment(u,c)&&completionState(c,u).complete).length,cert=db.users.reduce((n,u)=>n+(u.certificates||[]).filter(x=>x.courseId===c.id).length,0);lines.push([c.name,e,d,e?Math.round(d/e*100)+'%':'0%',cert])});
+  let csv=lines.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(';')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='relatorio_konnex.csv';a.click();
+}
+function certAdmin(){
+  return `<div class="section"><div><h2>Certificados</h2><p class="muted">Gerencie modelos e consulte certificados emitidos.</p></div><button class="btn primary" onclick="certTemplateEditor()">+ Novo modelo</button></div>
+  <div class="grid">${(db.certTemplates||[]).map(t=>`<div class="card"><h3>${esc(t.name)}</h3><p class="muted">${esc(t.title)}</p><div class="actions"><button class="btn small secondary" onclick="certTemplateEditor('${t.id}')">Editar</button><button class="btn small danger" onclick="deleteCertTemplate('${t.id}')">Excluir</button></div></div>`).join('')}</div>
+  <div class="panel" style="margin-top:18px"><h3>Certificados emitidos</h3>${certificateRows()}</div>`;
+}
+function certificateRows(){
+  let rows=[];db.users.forEach(u=>(u.certificates||[]).forEach(v=>{let c=db.courses.find(x=>x.id===v.courseId);if(c)rows.push(`<tr><td>${esc(v.code)}</td><td>${esc(u.name)}</td><td>${esc(c.name)}</td><td>${esc(v.issuedAt?new Date(v.issuedAt).toLocaleDateString('pt-BR'):'-')}</td><td><button class="btn small outline" onclick="showCertificate('${c.id}','${u.id}')">Abrir</button></td></tr>`)}));return rows.length?`<table class="table"><tr><th>Código</th><th>Aluno</th><th>Curso</th><th>Emissão</th><th>Ação</th></tr>${rows.join('')}</table>`:'<div class="empty">Nenhum certificado emitido.</div>';
+}
+function certTemplateEditor(id){
+  let t=id?db.certTemplates.find(x=>x.id===id):{id:uid('tpl'),name:'Novo modelo',title:'CERTIFICADO',text:'Certificamos que {{NOME_DO_ALUNO}} concluiu o curso {{NOME_DO_CURSO}}, com carga horária de {{CARGA_HORARIA}}, em {{DATA_CONCLUSAO}}.',extra:'Instituto Konnex\\nCódigo: {{CODIGO}}',background:''};
+  openModal(id?'Editar modelo':'Novo modelo',`<div class="field"><label>Nome do modelo</label><input id="ctName" value="${esc(t.name)}"></div><div class="field"><label>Título</label><input id="ctTitle" value="${esc(t.title)}"></div><div class="field"><label>Texto</label><textarea id="ctText">${esc(t.text)}</textarea></div><div class="field"><label>Informações adicionais</label><textarea id="ctExtra">${esc(t.extra)}</textarea></div><div class="field"><label>Imagem de fundo (URL)</label><input id="ctBg" value="${esc(t.background||'')}"></div><button class="btn primary" onclick="saveCertTemplate('${t.id}',${id?'true':'false'})">Salvar modelo</button>`);
+}
+function saveCertTemplate(id,existing){let t={id,name:$('ctName').value.trim(),title:$('ctTitle').value.trim(),text:$('ctText').value,extra:$('ctExtra').value,background:$('ctBg').value};if(!t.name){alert('Informe o nome do modelo.');return}if(existing){let i=db.certTemplates.findIndex(x=>x.id===id);if(i>=0)db.certTemplates[i]=t}else db.certTemplates.push(t);persist();closeModal();adminTab('cert')}
+function deleteCertTemplate(id){if(id==='default'){alert('O modelo padrão não pode ser excluído.');return}if(!confirm('Excluir este modelo?'))return;db.certTemplates=db.certTemplates.filter(x=>x.id!==id);db.courses.forEach(c=>{if(c.certificateTemplateId===id)c.certificateTemplateId='default'});persist();adminTab('cert')}
+function faqEditor(i){
+  let f=i!=null?db.faqs[i]:{q:'',a:''};
+  openModal(i!=null?'Editar pergunta':'Nova pergunta',`<div class="field"><label>Pergunta</label><input id="faqQ" value="${esc(f.q)}"></div><div class="field"><label>Resposta</label><textarea id="faqA">${esc(f.a)}</textarea></div><button class="btn primary" onclick="saveFaq(${i==null?'null':i})">Salvar</button>`);
+}
+function saveFaq(i){let q=$('faqQ').value.trim(),a=$('faqA').value.trim();if(!q||!a){alert('Preencha pergunta e resposta.');return}if(i===null)db.faqs.push({q,a});else db.faqs[i]={q,a};persist();closeModal();adminTab('faq')}
+function deleteFaq(i){if(!confirm('Excluir esta pergunta?'))return;db.faqs.splice(i,1);persist();adminTab('faq')}
+
+/* Painéis da página inicial: editor explícito, preservando a funcionalidade consolidada da 2.2 */
+function defaultPanels(){return [
+  {id:'p1',icon:'📚',title:'Cursos estruturados',description:'Organize módulos, aulas, materiais, atividades e simuladores.',active:true},
+  {id:'p2',icon:'💻',title:'Aprendizagem prática',description:'Integre ferramentas e simuladores aos conteúdos dos cursos.',active:true},
+  {id:'p3',icon:'🎓',title:'Certificação',description:'Prepare modelos personalizados e disponibilize certificados ao concluir os requisitos.',active:true}
+]}
+if(!Array.isArray(db.settings.homePanels))db.settings.homePanels=defaultPanels();
+function panelEditor(i){
+  let x=i!=null?db.settings.homePanels[i]:{id:uid('panel'),icon:'✨',title:'Novo painel',description:'',active:true};
+  openModal(i!=null?'Editar painel':'Novo painel',`<div class="field"><label>Ícone</label><input id="peIcon" value="${esc(x.icon)}"></div><div class="field"><label>Título</label><input id="peTitle" value="${esc(x.title)}"></div><div class="field"><label>Descrição</label><textarea id="peDesc">${esc(x.description)}</textarea></div><div class="checkline"><input id="peActive" type="checkbox" ${x.active!==false?'checked':''}><span>Painel ativo</span></div><button class="btn primary" onclick="savePanel(${i==null?'null':i},'${x.id}')">Salvar painel</button>`);
+}
+function savePanel(i,id){let x={id,icon:$('peIcon').value||'✨',title:$('peTitle').value.trim(),description:$('peDesc').value.trim(),active:$('peActive').checked};if(!x.title){alert('Informe o título do painel.');return}if(i===null)db.settings.homePanels.push(x);else db.settings.homePanels[i]=x;persist();closeModal();adminTab('site')}
+function deletePanel(i){if(!confirm('Excluir este painel da página inicial?'))return;db.settings.homePanels.splice(i,1);persist();adminTab('site')}
+function renderHomePanels(){let arr=(db.settings.homePanels||[]).filter(x=>x.active!==false);let el=document.querySelector('#home .grid');if(el)el.innerHTML=arr.map(x=>`<div class="card"><h3>${esc(x.icon||'✨')} ${esc(x.title)}</h3><p class="muted">${esc(x.description||'')}</p></div>`).join('')||'<div class="empty" style="grid-column:1/-1">Nenhum painel ativo.</div>'}
+const _oldApplySettings=applySettings;
+applySettings=function(){_oldApplySettings();renderHomePanels()};
+function siteEditor(){
+  return `<div class="panel"><h2>Editor do site</h2>
+  <div class="two"><div class="field"><label>Nome</label><input id="sn" value="${esc(db.settings.name)}"></div><div class="field"><label>Subtítulo</label><input id="stag" value="${esc(db.settings.tag)}"></div></div>
+  <div class="field"><label>Título da página inicial</label><input id="shTitle" value="${esc(db.settings.homeTitle)}"></div><div class="field"><label>Texto da página inicial</label><textarea id="shText">${esc(db.settings.homeText)}</textarea></div>
+  <div class="field"><label>Título da página Sobre</label><input id="saTitle" value="${esc(db.settings.aboutTitle)}"></div><div class="field"><label>Texto da página Sobre</label><textarea id="saText">${esc(db.settings.aboutText)}</textarea></div>
+  <div class="field"><label>Contato</label><textarea id="scontact">${esc(db.settings.contact)}</textarea></div><div class="field"><label>Cor principal</label><input id="sprimary" type="color" value="${esc(db.settings.primary)}"></div>
+  <h3>Menu público</h3>${db.settings.menu.map((m,i)=>`<div class="checkline"><input type="checkbox" id="menu${i}" ${m.active?'checked':''}><span>${esc(m.label)}</span></div>`).join('')}
+  <button class="btn primary" onclick="saveSite()">Salvar alterações</button></div>
+  <div class="panel" style="margin-top:18px"><div class="section"><div><h2>Painéis da página inicial</h2><p class="muted">Edite exatamente os blocos exibidos na página inicial.</p></div><button class="btn primary" onclick="panelEditor(null)">+ Novo painel</button></div>
+  ${(db.settings.homePanels||[]).map((x,i)=>`<div class="card" style="margin:9px 0"><div class="actions" style="justify-content:space-between"><div><h3>${esc(x.icon||'✨')} ${esc(x.title)}</h3><p class="muted">${esc(x.description||'')}</p><span class="tag">${x.active===false?'Inativo':'Ativo'}</span></div><div class="actions"><button class="btn small secondary" onclick="panelEditor(${i})">Editar painel</button><button class="btn small danger" onclick="deletePanel(${i})">Excluir</button></div></div></div>`).join('')||'<div class="empty">Nenhum painel cadastrado.</div>'}</div>`;
+}
+function renderCatalog(){let pub=db.courses.filter(c=>c.status==='Publicado'&&!c.archived);$('catalog').innerHTML=pub.length?pub.map(courseCard).join(''):'<div class="empty" style="grid-column:1/-1">Nenhum curso publicado ainda.</div>'}
+
+
+
+/* ===== Konnex 2.2 — camada de aprimoramentos funcionais ===== */
+const KX_ASSET_DB='konnex_assets_v1';
+let kxAssetDBPromise=null;
+let kxAssetUrls=new Map();
+let kxPendingEnrollment=null;
+
+function kxOpenAssetDB(){
+  if(kxAssetDBPromise)return kxAssetDBPromise;
+  kxAssetDBPromise=new Promise((resolve,reject)=>{
+    if(!window.indexedDB){reject(new Error('IndexedDB indisponível'));return}
+    const r=indexedDB.open(KX_ASSET_DB,1);
+    r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('assets'))d.createObjectStore('assets',{keyPath:'id'})};
+    r.onsuccess=()=>resolve(r.result);
+    r.onerror=()=>reject(r.error||new Error('Não foi possível abrir a biblioteca de arquivos'));
+  });
+  return kxAssetDBPromise;
+}
+function kxReadAsDataURL(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('Não foi possível ler o arquivo'));r.readAsDataURL(file)})}
+async function kxSaveAsset(file){
+  if(!file)throw new Error('Nenhum arquivo selecionado.');
+  if(file.size>100*1024*1024)throw new Error('O arquivo excede o limite local de 100 MB.');
+  const data=await kxReadAsDataURL(file);
+  const rec={id:'asset_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),name:file.name,mime:file.type||'application/octet-stream',size:file.size,data,updatedAt:new Date().toISOString()};
+  const d=await kxOpenAssetDB();
+  await new Promise((resolve,reject)=>{const tx=d.transaction('assets','readwrite');tx.objectStore('assets').put(rec);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error||new Error('Falha ao guardar o arquivo'))});
+  return rec;
+}
+async function kxGetAsset(id){
+  const d=await kxOpenAssetDB();
+  return new Promise((resolve,reject)=>{const tx=d.transaction('assets','readonly'),q=tx.objectStore('assets').get(id);q.onsuccess=()=>resolve(q.result||null);q.onerror=()=>reject(q.error)})
+}
+async function kxListAssets(){
+  const d=await kxOpenAssetDB();
+  return new Promise((resolve,reject)=>{const tx=d.transaction('assets','readonly'),q=tx.objectStore('assets').getAll();q.onsuccess=()=>resolve((q.result||[]).sort((a,b)=>String(a.name).localeCompare(String(b.name),'pt-BR')));q.onerror=()=>reject(q.error)})
+}
+async function kxDeleteAsset(id){
+  const d=await kxOpenAssetDB();
+  await new Promise((resolve,reject)=>{const tx=d.transaction('assets','readwrite');tx.objectStore('assets').delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})
+  const old=kxAssetUrls.get(id);if(old&&old.startsWith('blob:'))URL.revokeObjectURL(old);kxAssetUrls.delete(id);
+}
+async function kxAssetData(ref){
+  const m=String(ref||'').match(/^kxasset:(.+)$/);if(!m)return ref||'';
+  const rec=await kxGetAsset(m[1]);return rec?rec.data:'';
+}
+async function kxAssetName(ref){const m=String(ref||'').match(/^kxasset:(.+)$/);if(!m)return '';const rec=await kxGetAsset(m[1]);return rec?.name||''}
+async function kxHydrateAssetImages(root=document){
+  const imgs=[...root.querySelectorAll('img[data-kx-asset]')];
+  for(const img of imgs){const src=await kxAssetData(img.dataset.kxAsset);if(src)img.src=src;else img.alt='Arquivo de imagem não encontrado'}
+}
+function kxAssetRefLabel(ref){return String(ref||'').startsWith('kxasset:')?'Arquivo local associado':'Nenhum arquivo local associado'}
+async function kxHandleCourseCover(input){
+  try{const f=input.files?.[0];if(!f)return;if(!/^image\//i.test(f.type))throw new Error('A capa precisa ser uma imagem.');const rec=await kxSaveAsset(f);syncDraftFields();_courseDraft.cover='kxasset:'+rec.id;courseEditorTab('general')}catch(e){alert(e.message)}finally{if(input)input.value=''}
+}
+async function kxHandleContentFile(input,i,j){
+  try{
+    const f=input.files?.[0];if(!f)return;
+    syncDraftFields();const type=String(_courseDraft.modules[i]?.contents[j]?.type||'').toLowerCase();
+    if(type==='pdf'&&!(/pdf/i.test(f.type)||/\.pdf$/i.test(f.name)))throw new Error('Para conteúdo PDF, selecione um arquivo PDF.');
+    if((type==='vídeo'||type==='video')&&!/^video\//i.test(f.type)&&!(/\.(mp4|webm|ogg|mov)$/i.test(f.name)))throw new Error('Para vídeo, selecione um arquivo de vídeo.');
+    const rec=await kxSaveAsset(f);_courseDraft.modules[i].contents[j].url='kxasset:'+rec.id;courseEditorTab('structure');
+  }catch(e){alert(e.message)}finally{if(input)input.value=''}
+}
+async function kxHandleCertBackground(input,id){
+  try{const f=input.files?.[0];if(!f)return;if(!/^image\//i.test(f.type))throw new Error('O fundo do certificado precisa ser uma imagem.');const rec=await kxSaveAsset(f);const t=db.certTemplates.find(x=>x.id===id);if(t){t.background='kxasset:'+rec.id;persist();certTemplateEditor(id)}}catch(e){alert(e.message)}finally{if(input)input.value=''}
+}
+function mediaLibraryHTML(){
+  return `<div class="section"><div><h2>Arquivos e mídia</h2><p class="muted">Biblioteca local para capas, PDFs, vídeos, imagens e outros arquivos usados na plataforma.</p></div><label class="btn primary" style="cursor:pointer">+ Adicionar arquivo<input id="kxAssetUpload" type="file" multiple hidden onchange="kxAddAssetFiles(this)"></label></div><div class="notice">Os arquivos ficam armazenados localmente neste navegador. Eles podem ser usados diretamente em cursos e modelos de certificado.</div><div id="kxAssetLibrary" class="panel">Carregando...</div>`;
+}
+async function kxAddAssetFiles(input){
+  const files=[...(input?.files||[])];if(!files.length)return;let ok=0,err=[];
+  for(const f of files){try{await kxSaveAsset(f);ok++}catch(e){err.push(f.name+': '+e.message)}}
+  input.value='';await kxRefreshAssetLibrary();if(err.length)alert('Alguns arquivos não foram adicionados:\n'+err.join('\n'));else alert(ok+' arquivo(s) adicionado(s).');
+}
+async function kxRefreshAssetLibrary(){const el=$('kxAssetLibrary');if(!el)return;try{const a=await kxListAssets();el.innerHTML=a.length?a.map(x=>`<div class="row" style="display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:10px 0"><div><strong>${esc(x.name)}</strong><div class="muted">${Math.max(1,Math.round(x.size/1024))} KB • ${esc(x.mime)}</div></div><button class="btn small danger" onclick="kxDeleteAssetAndRefresh('${x.id}')">Excluir</button></div>`).join(''):'<div class="empty">Nenhum arquivo na biblioteca.</div>'}catch(e){el.innerHTML='<div class="notice">Não foi possível carregar a biblioteca de arquivos.</div>'}}
+async function kxDeleteAssetAndRefresh(id){if(!confirm('Excluir este arquivo da biblioteca? Cursos ou certificados que dependam dele poderão ficar sem mídia.'))return;await kxDeleteAsset(id);kxRefreshAssetLibrary()}
+
+/* Corrige a seleção de simuladores: a versão anterior chamava uma função inexistente. */
+function kxSelectSimulator(i,j){
+  syncDraftFields();
+  if(!kxSimulators.length){alert('Adicione primeiro um simulador na Biblioteca de simuladores.');return}
+  const body=`<div class="notice">Escolha um simulador já adicionado à biblioteca.</div>${kxSimulators.map(f=>`<div class="row"><div><strong>${esc(f.name)}</strong><div class="muted">${Math.max(1,Math.round(f.size/1024))} KB</div></div><button class="btn small primary" onclick="kxAssignSimulator(${i},${j},'${f.id}')">Selecionar</button></div>`).join('')}`;
+  openModal('Selecionar simulador',body);
+}
+function kxAssignSimulator(i,j,id){if(!_courseDraft?.modules?.[i]?.contents?.[j])return;_courseDraft.modules[i].contents[j].url='kxsim:'+id;closeModal();courseEditorTab('structure')}
+function courseContentTypeChanged(i,j,type){syncDraftFields();if(_courseDraft?.modules?.[i]?.contents?.[j])_courseDraft.modules[i].contents[j].type=type;courseEditorTab('structure')}
+
+/* Editor de curso: capa por arquivo local + arquivos locais nos conteúdos. */
+function courseEditor(id){
+  let c=id?db.courses.find(x=>x.id===id):null;
+  _courseDraft=c?JSON.parse(JSON.stringify(c)):normalizeCourse({id:uid('course'),name:'Novo curso',desc:'',status:'Rascunho',modality:'Online',hours:'',audience:'',priceType:'free',price:'',accessType:'permanent',accessDays:null,completionRule:'all',requiredModules:[],certificateTemplateId:'default',modules:[]});
+  _courseDraft.modules=_courseDraft.modules||[];
+  _courseDraft.modules.forEach((m,mi)=>{m.id=m.id||uid('mod');m.order=mi+1;m.contents=m.contents||[];m.contents.forEach((x,xi)=>{x.id=x.id||uid('content');x.order=xi+1})});
+  openModal(id?'Editar curso':'Novo curso',courseEditorHTML());
+  courseEditorTab('general');
+}
+function courseEditorTab(tab){
+  if(!_courseDraft)return;syncDraftFields();
+  let c=_courseDraft,b=$('modalBody');if(!b)return;let body='';
+  if(tab==='general'){
+    body=`<div class="two"><div class="field"><label>Nome do curso</label><input id="ceName" value="${esc(c.name||'')}"></div><div class="field"><label>Modalidade</label><select id="ceMod">${['Online','Presencial','Híbrido'].map(x=>`<option ${c.modality===x?'selected':''}>${x}</option>`).join('')}</select></div></div>
+    <div class="field"><label>Descrição</label><textarea id="ceDesc">${esc(c.desc||'')}</textarea></div>
+    <div class="two"><div class="field"><label>Carga horária</label><input id="ceHours" value="${esc(c.hours||'')}"></div><div class="field"><label>Público-alvo</label><input id="ceAudience" value="${esc(c.audience||'')}"></div></div>
+    <div class="two"><div class="field"><label>Tipo</label><select id="cePriceType"><option value="free" ${c.priceType!=='paid'?'selected':''}>Gratuito</option><option value="paid" ${c.priceType==='paid'?'selected':''}>Pago</option></select></div><div class="field"><label>Valor</label><input id="cePrice" value="${esc(c.price||'')}"></div></div>
+    <div class="field"><label>Capa do curso</label><div class="actions"><label class="btn outline" style="cursor:pointer">Adicionar imagem do computador<input id="ceCoverFile" type="file" accept="image/*" hidden onchange="kxHandleCourseCover(this)"></label>${c.cover?`<button class="btn small danger" onclick="syncDraftFields();_courseDraft.cover='';courseEditorTab('general')">Remover capa</button>`:''}</div><div class="mini" style="margin-top:7px">${c.cover?.startsWith?.('kxasset:')?kxAssetRefLabel(c.cover):c.cover?'Capa por endereço externo':'Nenhuma capa selecionada.'}</div><div class="field" style="margin-top:10px"><label>Ou usar URL da imagem</label><input id="ceCover" value="${esc(c.cover&& !String(c.cover).startsWith('kxasset:')?c.cover:'')}"></div>${c.cover?.startsWith?.('kxasset:')?`<img id="ceCoverPreview" data-kx-asset="${esc(c.cover.slice(8))}" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`:''}</div>
+    <button class="btn primary" onclick="saveCourseDraft()">Salvar curso</button>`;
+  }else if(tab==='structure'){
+    body=`<div class="section"><h3>Estrutura do curso</h3><button class="btn primary small" onclick="addDraftModule()">+ Módulo</button></div><div id="draftModules">${(_courseDraft.modules||[]).map((m,i)=>draftModuleHTML(m,i)).join('')||'<div class="empty">Nenhum módulo. Adicione o primeiro módulo.</div>'}</div><div class="actions" style="margin-top:15px"><button class="btn primary" onclick="saveCourseDraft()">Salvar curso</button></div>`;
+  }else{
+    body=`<div class="two"><div class="field"><label>Regra de conclusão</label><select id="ceRule"><option value="all" ${c.completionRule==='all'?'selected':''}>Todos os conteúdos obrigatórios</option><option value="final" ${c.completionRule==='final'?'selected':''}>Conteúdos obrigatórios + atividade final</option><option value="modules" ${c.completionRule==='modules'?'selected':''}>Módulos obrigatórios</option><option value="manual" ${c.completionRule==='manual'?'selected':''}>Conclusão manual pelo administrador</option></select></div><div class="field"><label>Acesso</label><select id="ceAccess"><option value="permanent" ${c.accessType!=='period'?'selected':''}>Permanente</option><option value="period" ${c.accessType==='period'?'selected':''}>Por período</option></select></div></div><div class="field"><label>Dias de acesso (se for por período)</label><input id="ceDays" type="number" min="1" value="${esc(c.accessDays||30)}"></div><div class="field"><label>Modelo de certificado</label><select id="ceCert">${db.certTemplates.map(t=>`<option value="${esc(t.id)}" ${c.certificateTemplateId===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div><div class="notice">Simuladores não entram no cálculo de conclusão. Conteúdos marcados como obrigatórios entram na regra escolhida.</div><button class="btn primary" onclick="saveCourseDraft()">Salvar curso</button>`;
+  }
+  b.innerHTML=`<div class="modalhead"><h2>${tab==='general'?'Informações do curso':tab==='structure'?'Estrutura do curso':'Conclusão e acesso'}</h2><button class="btn secondary" onclick="closeModal()">Fechar</button></div><div class="subnav"><button class="btn small secondary" onclick="courseEditorTab('general')">Informações</button><button class="btn small secondary" onclick="courseEditorTab('structure')">Estrutura</button><button class="btn small secondary" onclick="courseEditorTab('rules')">Conclusão e acesso</button></div>${body}`;
+  if(tab==='general'&&c.cover?.startsWith?.('kxasset:'))kxHydrateAssetImages(b);
+}
+function draftContentHTML(i,j,x){
+  const local=String(x.url||'').startsWith('kxasset:');
+  const sim=String(x.url||'').startsWith('kxsim:');
+  return `<div class="content-editor"><div class="content-head"><strong>${j+1}. ${esc(x.title||'Conteúdo')}</strong><div class="actions"><button class="btn small secondary" onclick="moveDraftContent(${i},${j},-1)">↑</button><button class="btn small secondary" onclick="moveDraftContent(${i},${j},1)">↓</button><button class="btn small danger" onclick="removeDraftContent(${i},${j})">Excluir</button></div></div><div class="content-body"><div class="two"><div class="field"><label>Título</label><input id="dcTitle${i}_${j}" value="${esc(x.title||'')}"></div><div class="field"><label>Tipo</label><select id="dcType${i}_${j}" onchange="courseContentTypeChanged(${i},${j},this.value)">${['Aula','Vídeo','PDF','Atividade','Simulador'].map(t=>`<option ${x.type===t?'selected':''}>${t}</option>`).join('')}</select></div></div><div class="field"><label>Descrição / texto</label><textarea id="dcDesc${i}_${j}">${esc(x.description||'')}</textarea></div>${sim?`<div class="notice">${esc(kxSimLabel(String(x.url).slice(6)))} <button class="btn small outline" onclick="kxSelectSimulator(${i},${j})">Trocar simulador</button></div>`:`<div class="field"><label>Arquivo ou URL</label><div class="actions"><input id="dcUrl${i}_${j}" value="${esc(local?'':x.url||'')}" placeholder="https://..." style="flex:1;min-width:220px"><label class="btn outline" style="cursor:pointer">Adicionar arquivo<input type="file" hidden onchange="kxHandleContentFile(this,${i},${j})"></label></div><div class="mini" style="margin-top:6px">${local?`Arquivo local: ${esc(kxAssetRefLabel(x.url))}`:'Você também pode informar um endereço externo.'}</div></div>`}<div class="checkline"><input id="dcReq${i}_${j}" type="checkbox" ${x.required!==false?'checked':''}><span>Conteúdo obrigatório</span></div><div class="checkline"><input id="dcFinal${i}_${j}" type="checkbox" ${x.finalActivity?'checked':''}><span>Atividade final</span></div>${!sim&&local?`<button class="btn small danger" onclick="syncDraftFields();_courseDraft.modules[${i}].contents[${j}].url='';courseEditorTab('structure')">Remover arquivo local</button>`:''}${x.type==='Simulador'&&!sim?`<button class="btn small outline" onclick="kxSelectSimulator(${i},${j})">Selecionar simulador da biblioteca</button>`:''}</div></div>`;
+}
+function syncDraftFields(){
+  if(!_courseDraft)return;const v=id=>$(id)?.value??'';
+  if($('ceName')){_courseDraft.name=v('ceName').trim();_courseDraft.desc=v('ceDesc');_courseDraft.modality=v('ceMod');_courseDraft.hours=v('ceHours');_courseDraft.audience=v('ceAudience');_courseDraft.priceType=v('cePriceType');_courseDraft.price=v('cePrice');if($('ceCover')?.value.trim())_courseDraft.cover=$('ceCover').value.trim();}
+  if($('ceRule')){_courseDraft.completionRule=v('ceRule');_courseDraft.accessType=v('ceAccess');_courseDraft.accessDays=Number(v('ceDays'))||null;_courseDraft.certificateTemplateId=v('ceCert')||'default';}
+  (_courseDraft.modules||[]).forEach((m,i)=>{m.title=$(`dmTitle${i}`)?.value||m.title;m.description=$(`dmDesc${i}`)?.value||'';(m.contents||[]).forEach((x,j)=>{x.title=$(`dcTitle${i}_${j}`)?.value||x.title;x.type=$(`dcType${i}_${j}`)?.value||x.type;x.description=$(`dcDesc${i}_${j}`)?.value||'';if($(`dcUrl${i}_${j}`)&&!String(x.url||'').startsWith('kxasset:')&&!String(x.url||'').startsWith('kxsim:'))x.url=$(`dcUrl${i}_${j}`).value.trim();x.required=!!$(`dcReq${i}_${j}`)?.checked;x.finalActivity=!!$(`dcFinal${i}_${j}`)?.checked})})
+}
+function saveCourseDraft(){syncDraftFields();if(!_courseDraft.name.trim()){alert('Informe o nome do curso.');return}if(!_courseDraft.modules.length)alert('O curso será salvo sem módulos. Você poderá adicioná-los depois.');_courseDraft.modules.forEach((m,i)=>{m.order=i+1;m.contents.forEach((x,j)=>x.order=j+1)});let idx=db.courses.findIndex(x=>x.id===_courseDraft.id);if(idx>=0)db.courses[idx]=normalizeCourse(_courseDraft);else db.courses.push(normalizeCourse(_courseDraft));persist();closeModal();adminTab('courses')}
+
+/* Matrícula: após concluir a ação, o usuário é levado efetivamente para a área do aluno. */
+function enroll(courseId){
+  const course=db.courses.find(x=>x.id===courseId);if(!course)return;
+  const user=db.users.find(x=>x.id===db.currentUser);
+  if(!user){kxPendingEnrollment=courseId;registerStudent(courseId);return}
+  if(course.status!=='Publicado'||course.archived){alert('Este curso não está disponível para matrícula.');return}
+  let existing=getEnrollment(user,course);
+  if(existing&&isEnrollmentActive(user,course)){alert('Você já está matriculado neste curso.');go('student');return}
+  if(existing&&existing.status==='blocked'){alert('Sua matrícula está bloqueada.');return}
+  const e=ensureEnrollment(user,course);e.status='active';e.enrolledAt=e.enrolledAt||nowISO();e.expiresAt=course.accessType==='period'?daysFromNow(course.accessDays||30):null;
+  persist();alert(course.priceType==='paid'?'Matrícula registrada em modo demonstração. Na versão com pagamentos, o checkout será realizado antes da liberação.':'Matrícula realizada com sucesso.');kxPendingEnrollment=null;go('student');
+}
+function login(){
+  const loginValue=kxSafeEmail($('loginEmail')?.value),pass=$('loginPassword')?.value||'';
+  if(loginValue===kxSafeEmail(db.admin.login)&&pass===db.admin.password){db.currentUser=null;db.adminSession=true;persist();go('admin');return}
+  const u=kxFindUserByEmail(loginValue);if(!u||u.password!==pass){alert('E-mail ou senha incorretos.');return}
+  db.currentUser=u.id;db.adminSession=false;
+  const pending=kxPendingEnrollment;kxPendingEnrollment=null;
+  if(pending){kxEnrollAndOpen(pending,u);persist();go('student');return}
+  persist();go('student');
+}
+
+/* Conteúdo local: abre PDFs, imagens e vídeos sem depender de links externos. */
+async function studentOpenContent(courseId,contentId){
+  const course=db.courses.find(c=>c.id===courseId),user=db.users.find(x=>x.id===db.currentUser),content=activeContents(course||{}).find(c=>c.id===contentId);if(!course||!user||!content)return;if(!canOpenContent(course,content,user)){alert('Este conteúdo está bloqueado.');return}
+  markContentOpened(course,content,user);let type=String(content.type||'').toLowerCase(),src=await kxAssetData(content.url),body='';
+  if(type==='simulador'){if(content.url){const stored=String(content.url).startsWith('kxsim:'),simId=stored?String(content.url).slice(6):'';body=`<div class="panel"><h3>🧩 ${esc(content.title||'Simulador')}</h3><p>${esc(content.description||'Use o simulador para realizar a atividade prática.')}</p><button class="btn primary" onclick="${stored?`kxOpenStoredSimulator('${esc(simId)}')`:`openSimulator('${esc(content.url)}')`}">Abrir simulador</button></div>`}else body='<div class="notice">Este conteúdo está configurado como simulador, mas ainda não possui um arquivo associado.</div>'}
+  else if(type==='pdf'||type==='material'){body=src?`<iframe src="${src}" style="width:100%;height:600px;border:1px solid #ddd;border-radius:10px"></iframe>`:content.url?`<iframe src="${esc(content.url)}" style="width:100%;height:600px;border:1px solid #ddd;border-radius:10px"></iframe>`:'<div class="notice">Nenhum PDF/material foi configurado.</div>'}
+  else if(type==='vídeo'||type==='video'){body=src?`<video controls style="width:100%;max-height:600px;border-radius:10px" src="${src}"></video>`:content.url?`<div class="embed"><iframe src="${esc(content.url)}" title="${esc(content.title)}" allowfullscreen style="width:100%;height:520px;border:0"></iframe></div>`:'<div class="notice">Nenhum vídeo foi configurado.</div>'}
+  else if(src&&/^image\//i.test((await kxGetAsset(String(content.url).slice(8)))?.mime||'')){body=`<img src="${src}" style="max-width:100%;max-height:600px;display:block;margin:auto;border-radius:10px">`}else body=`<div class="contentText">${esc(content.description||'Conteúdo da aula.')}</div>`;
+  const done=contentProgress(course,user,content)==='completed';$('studentArea').innerHTML=`<div class="panel"><button class="btn outline" onclick="renderCourseView('${course.id}')">← Voltar ao curso</button><h2 style="margin-top:18px">${esc(content.title)}</h2><p class="muted">${esc(content.type||'Aula')}</p>${body}<div class="actions" style="margin-top:18px"><button class="btn primary" onclick="completeContent('${course.id}','${content.id}')">${done?'Concluído':'Marcar como concluído'}</button></div></div>`;persist()
+}
+
+/* Certificados: fundo também pode ser um arquivo do computador. */
+async function certTemplateEditor(id){
+  let t=id?db.certTemplates.find(x=>x.id===id):{id:uid('tpl'),name:'Novo modelo',title:'CERTIFICADO',text:'Certificamos que {{NOME_DO_ALUNO}} concluiu o curso {{NOME_DO_CURSO}}, com carga horária de {{CARGA_HORARIA}}, em {{DATA_CONCLUSAO}}.',extra:'Instituto Konnex\nCódigo: {{CODIGO}}',background:''};
+  openModal(id?'Editar modelo':'Novo modelo',`<div class="field"><label>Nome do modelo</label><input id="ctName" value="${esc(t.name)}"></div><div class="field"><label>Título</label><input id="ctTitle" value="${esc(t.title)}"></div><div class="field"><label>Texto</label><textarea id="ctText">${esc(t.text)}</textarea></div><div class="field"><label>Informações adicionais</label><textarea id="ctExtra">${esc(t.extra)}</textarea></div><div class="field"><label>Fundo do certificado</label><div class="actions"><label class="btn outline" style="cursor:pointer">Adicionar imagem do computador<input id="ctBgFile" type="file" accept="image/*" hidden onchange="kxHandleCertBackground(this,'${t.id}')"></label>${t.background?`<button class="btn small danger" onclick="kxClearCertBackground('${t.id}')">Remover fundo</button>`:''}</div><div class="mini" style="margin-top:7px">${t.background?esc(t.background.startsWith('kxasset:')?'Imagem local associada':'Imagem por URL'):'Nenhum fundo selecionado.'}</div><input id="ctBg" value="${esc(t.background||'')}" placeholder="Ou informe uma URL de imagem" style="margin-top:8px;width:100%;border:1px solid #cbd6df;border-radius:8px;padding:10px"></div><button class="btn primary" onclick="saveCertTemplate('${t.id}',${id?'true':'false'})">Salvar modelo</button>`)
+}
+function kxClearCertBackground(id){const t=db.certTemplates.find(x=>x.id===id);if(t){t.background='';persist();certTemplateEditor(id)}}
+function saveCertTemplate(id,existing){const t={id,name:$('ctName').value.trim(),title:$('ctTitle').value.trim(),text:$('ctText').value,extra:$('ctExtra').value,background:$('ctBg').value.trim()};if(!t.name){alert('Informe o nome do modelo.');return}if(existing){const i=db.certTemplates.findIndex(x=>x.id===id);if(i>=0)db.certTemplates[i]=t}else db.certTemplates.push(t);persist();closeModal();adminTab('cert')}
+async function showCertificate(cid,uid){const c=db.courses.find(x=>x.id===cid),u=db.users.find(x=>x.id===uid)||db.users[0];if(!c||!u)return;const t=db.certTemplates.find(x=>x.id===c.certificateTemplateId)||db.certTemplates[0];let html=certificateHTML(u.name,c,t,u);openModal('Certificado',html);if(t.background?.startsWith('kxasset:')){const src=await kxAssetData(t.background);const el=document.querySelector('.certificate');if(el&&src)el.style.backgroundImage=`url("${src}")`}}
+
+/* Capa no catálogo e nos detalhes, inclusive quando é um arquivo local. */
+function courseCard(c){const local=String(c.cover||'').startsWith('kxasset:');return `<div class="card"><div class="cover">${local?`<img data-kx-asset="${esc(String(c.cover).slice(8))}" alt="Capa de ${esc(c.name)}">`:c.cover?`<img src="${esc(c.cover)}" alt="Capa de ${esc(c.name)}">`:'CAPA DO CURSO'}</div><span class="tag">${esc(c.modality||'Online')}</span><span class="tag">${esc(c.hours||'')}</span><span class="tag">${c.priceType==='paid'?'Pago':'Gratuito'}</span><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc||'')}</p><p><strong>${esc(c.price||'Gratuito')}</strong></p><button class="btn primary" onclick="viewCourse('${c.id}',false)">Ver curso</button></div>`}
+function renderCatalog(){const pub=db.courses.filter(c=>c.status==='Publicado'&&!c.archived);$('catalog').innerHTML=pub.length?pub.map(courseCard).join(''):'<div class="empty" style="grid-column:1/-1">Nenhum curso publicado ainda.</div>';kxHydrateAssetImages($('catalog'))}
+function viewCourse(id,student){const c=db.courses.find(x=>x.id===id);if(!c)return;const u=db.users.find(x=>x.id===db.currentUser)||null,enrolled=!!u&&!!getEnrollment(u,c)&&isEnrollmentActive(u,c),local=String(c.cover||'').startsWith('kxasset:');let body=`<div class="cover">${local?`<img id="courseDetailCover" data-kx-asset="${esc(String(c.cover).slice(8))}" alt="Capa de ${esc(c.name)}">`:c.cover?`<img src="${esc(c.cover)}" alt="Capa de ${esc(c.name)}">`:'CAPA DO CURSO'}</div><span class="tag">${esc(c.modality||'Online')}</span><span class="tag">${esc(c.hours||'')}</span><span class="tag">${c.priceType==='paid'?'Pago':'Gratuito'}</span><h2>${esc(c.name)}</h2><p class="muted">${esc(c.desc||'')}</p><p><b>Público-alvo:</b> ${esc(c.audience||'Não informado')}</p>${!student&&!enrolled?`<div class="notice">${c.priceType==='paid'?`Valor: <b>${esc(c.price||'')}</b>`:'Curso gratuito'} <button class="btn primary small" onclick="enroll('${c.id}')">${c.priceType==='paid'?'Inscrever-se':'Matricular-se'}</button></div>`:enrolled?'<div class="notice">Você já está matriculado neste curso. Acesse a área do aluno para continuar.</div>':''}<h3>Conteúdo programático</h3>${(c.modules||[]).filter(m=>m.active).length?c.modules.filter(m=>m.active).sort((a,b)=>a.order-b.order).map((m,mi)=>`<div class="module"><div class="modulehead"><span><strong>Módulo ${mi+1}: ${esc(m.title)}</strong><br><small>${esc(m.description||'')}</small></span><small>${(m.contents||[]).length} conteúdo(s)</small></div>${(m.contents||[]).filter(x=>x.active).sort((a,b)=>a.order-b.order).map(l=>`<div class="lesson"><span>${icon(l.type)} ${esc(l.title)}<br><small>${esc(l.type)} ${l.required?'• Obrigatório':''}</small></span>${student&&enrolled?`<button class="btn small ${isDone(c,u.id,l.id)?'outline':'secondary'}" onclick="completeContent('${id}','${l.id}')">${isDone(c,u.id,l.id)?'Concluído':'Concluir'}</button>`:''}</div>`).join('')}</div>`).join(''):'<p class="muted">Nenhum módulo cadastrado ainda.</p>'}${student&&enrolled?`<div class="panel"><h3>Progresso: ${currentProgress(c,u.id)}%</h3><div class="progress"><i style="width:${currentProgress(c,u.id)}%"></i></div>${currentProgress(c,u.id)===100?`<p class="notice">Curso concluído. O certificado está disponível.</p><button class="btn primary" onclick="showCertificate('${c.id}','${u.id}')">🎓 Abrir certificado</button>`:''}</div>`:''}`;openModal(c.name,body);if(local)kxHydrateAssetImages($('modalBody'))}
+
+/* Depois de qualquer render geral, hidrata as capas que vivem no IndexedDB. */
+const _kxBaseRender=render;
+render=function(){_kxBaseRender();renderCatalog();kxHydrateAssetImages(document);if(db.settings.homePanels)renderHomePanels()};
+
+/* Arquivos são assíncronos; ao abrir a aba, carrega a biblioteca. */
+const _kxBaseAdminTab=adminTab;
+adminTab=function(tab){_kxBaseAdminTab(tab);if(tab==='files')kxRefreshAssetLibrary()};
+
+
+document.addEventListener('change',e=>{if(e.target?.id==='kxSimUpload')kxAddSimulatorFiles(e.target)});
+kxRefreshSimulatorLibrary();
+render();
+
+
+/* ===== Fluxo completo de aluno para testes do Konnex 2.2 ===== */
+
+function kxSafeEmail(v){return String(v||'').trim().toLowerCase()}
+function kxFindUserByEmail(email){const e=kxSafeEmail(email);return db.users.find(u=>kxSafeEmail(u.email)===e)||null}
+function kxEnrollAndOpen(courseId,user){
+  const course=db.courses.find(c=>c.id===courseId); if(!course||!user)return false;
+  if(course.status!=='Publicado'||course.archived){alert('Este curso não está disponível para matrícula.');return false}
+  const e=ensureEnrollment(user,course); e.status='active'; e.enrolledAt=e.enrolledAt||nowISO();
+  e.expiresAt=course.accessType==='period'?daysFromNow(course.accessDays||30):null;
+  persist();
+  return true;
+}
+function registerStudent(courseId){
+  if(courseId)kxPendingEnrollment=courseId;
+  closeModal();
+  const course=courseId?db.courses.find(x=>x.id===courseId):null;
+  if($('registerIntro'))$('registerIntro').innerHTML=course?`Crie sua conta para se inscrever no curso <strong>${esc(course.name)}</strong> e acessar seu conteúdo.`:'Crie sua conta para acessar os cursos, acompanhar seu progresso e receber seus certificados.';
+  go('register');
+  setTimeout(()=>{if($('regName'))$('regName').focus()},50);
+}
+function recoverStudentPassword(){
+  const email=kxSafeEmail($('forgotEmail')?.value), pass=$('forgotPasswordNew')?.value||'', pass2=$('forgotPasswordConfirm')?.value||'';
+  if(!/^\S+@\S+\.\S+$/.test(email)){alert('Informe um e-mail válido.');return}
+  if(email===kxSafeEmail(db.admin.login)){alert('A senha administrativa deve ser alterada pelo painel administrativo.');return}
+  const u=kxFindUserByEmail(email);
+  if(!u){alert('Não encontramos uma conta de aluno com este e-mail.');return}
+  if(pass.length<6){alert('A nova senha deve ter pelo menos 6 caracteres.');return}
+  if(pass!==pass2){alert('A confirmação da nova senha não confere.');return}
+  u.password=pass;
+  persist();
+  $('forgotEmail').value='';$('forgotPasswordNew').value='';$('forgotPasswordConfirm').value='';
+  alert('Senha redefinida com sucesso. Agora você pode entrar com a nova senha.');
+  go('login');
+}
+function finishStudentRegistration(){
+  const name=$('regName')?.value.trim()||'', email=kxSafeEmail($('regEmail')?.value), pass=$('regPassword')?.value||'', pass2=$('regPassword2')?.value||'', terms=!!$('regTerms')?.checked;
+  if($('regEmailMsg')){$('regEmailMsg').style.display='none';$('regEmailMsg').innerHTML='';}
+  if(name.length<3){alert('Informe seu nome completo.');return}
+  if(!/^\S+@\S+\.\S+$/.test(email)){alert('Informe um e-mail válido.');return}
+  if(pass.length<6){alert('A senha deve ter pelo menos 6 caracteres.');return}
+  if(pass!==pass2){alert('As senhas não conferem.');return}
+  if(!terms){alert('Aceite a confirmação para criar a conta.');return}
+  if(email===kxSafeEmail(db.admin.login)){alert('Este e-mail/login é reservado para a administração.');return}
+  if(kxFindUserByEmail(email)){
+    const msg=$('regEmailMsg');
+    if(msg){msg.innerHTML='* Este e-mail já está cadastrado. <button type="button" class="link-btn" onclick="go(\'login\')">Entre na sua conta</button> ou use <button type="button" class="link-btn" onclick="go(\'forgotPassword\')">Esqueci minha senha</button>.';msg.style.display='block';}
+    else alert('Este e-mail já está cadastrado. Entre na sua conta ou use a opção “Esqueci minha senha”.');
+    return;
+  }
+  const u={id:uid('user'),name,email,password:pass,role:'student',createdAt:nowISO(),enrollments:[],courses:[],progress:{},certificates:[]};
+  db.users.push(u);db.currentUser=u.id;db.adminSession=false;
+  const courseId=kxPendingEnrollment;kxPendingEnrollment=null;
+  if(courseId)kxEnrollAndOpen(courseId,u);else persist();
+  const course=courseId?db.courses.find(c=>c.id===courseId):null;
+  $('regName').value='';$('regEmail').value='';$('regPassword').value='';$('regPassword2').value='';$('regTerms').checked=false;
+  persist();
+  if(course)alert(`Conta criada e inscrição realizada com sucesso no curso "${course.name}".`);
+  go('student');
+}
+function login(){
+  const loginValue=kxSafeEmail($('loginEmail')?.value), pass=$('loginPassword')?.value||'';
+  if(loginValue===kxSafeEmail(db.admin.login)&&pass===db.admin.password){db.currentUser=null;db.adminSession=true;persist();go('admin');return}
+  const u=kxFindUserByEmail(loginValue);
+  if(!u||u.password!==pass){alert('E-mail/login ou senha incorretos.');return}
+  db.currentUser=u.id;db.adminSession=false;
+  const pending=kxPendingEnrollment;kxPendingEnrollment=null;
+  if(pending)kxEnrollAndOpen(pending,u);else persist();
+  go('student');
+}
+function enroll(courseId){
+  const course=db.courses.find(c=>c.id===courseId);if(!course)return;
+  if(course.status!=='Publicado'||course.archived){alert('Este curso ainda não está disponível.');return}
+  const user=db.users.find(x=>x.id===db.currentUser);
+  if(!user){kxPendingEnrollment=courseId;registerStudent(courseId);return}
+  const existing=getEnrollment(user,course);
+  if(existing&&isEnrollmentActive(user,course)){alert('Você já está matriculado neste curso.');go('student');return}
+  if(existing&&existing.status==='blocked'){alert('Sua matrícula está bloqueada.');return}
+  kxEnrollAndOpen(courseId,user);
+  alert(course.priceType==='paid'?'Matrícula registrada em modo demonstração. Em uma versão online, o pagamento será confirmado antes da liberação.':'Matrícula realizada com sucesso.');
+  go('student');
+}
+function courseCard(c){
+  const cover=c.cover?String(c.cover):'';
+  return `<div class="card"><div class="cover">${cover? (cover.startsWith('kxasset:')?`<img data-kx-asset="${esc(cover.slice(8))}" alt="Capa do curso">`:`<img src="${esc(cover)}" alt="Capa do curso">`) : 'CAPA DO CURSO'}</div><span class="tag">${esc(c.modality||'Online')}</span><span class="tag">${esc(c.hours||'')}</span><span class="tag">${c.priceType==='paid'?'Pago':'Gratuito'}</span><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc||'')}</p><p><strong>${esc(c.price||'Gratuito')}</strong></p><button class="btn primary" onclick="viewCourse('${c.id}',false)">Ver curso</button></div>`;
+}
+function renderCatalog(){let pub=db.courses.filter(c=>c.status==='Publicado'&&!c.archived);$('catalog').innerHTML=pub.length?pub.map(courseCard).join(''):'<div class="empty" style="grid-column:1/-1">Nenhum curso publicado ainda.</div>';kxHydrateAssetImages($('catalog')).catch(()=>{})}
+function viewCourse(id,student){
+  const c=db.courses.find(x=>x.id===id);if(!c)return;
+  const u=db.users.find(x=>x.id===db.currentUser);const enrolled=!!u&&!!getEnrollment(u,c)&&isEnrollmentActive(u,c);
+  const cover=c.cover?String(c.cover):'';
+  const coverHtml=cover?(cover.startsWith('kxasset:')?`<img data-kx-asset="${esc(cover.slice(8))}" alt="Capa do curso">`:`<img src="${esc(cover)}" alt="Capa do curso">`):'CAPA DO CURSO';
+  const canStudent=!!u&&enrolled;
+  let body=`<div class="cover">${coverHtml}</div><span class="tag">${esc(c.modality||'Online')}</span><span class="tag">${esc(c.hours||'')}</span><span class="tag">${c.priceType==='paid'?'Pago':'Gratuito'}</span><h2>${esc(c.name)}</h2><p class="muted">${esc(c.desc||'')}</p><p><b>Público-alvo:</b> ${esc(c.audience||'Não informado')}</p>`;
+  if(!canStudent)body+=`<div class="notice">${c.priceType==='paid'?`Valor: <b>${esc(c.price||'')}</b>`:'Curso gratuito'} <button class="btn primary small" onclick="enroll('${c.id}')">${c.priceType==='paid'?'Inscrever-se':'Matricular-se'}</button></div>`;
+  body+=`<h3>Conteúdo programático</h3>`;
+  body+=(c.modules||[]).filter(m=>m.active!==false).sort((a,b)=>a.order-b.order).map((m,mi)=>`<div class="module"><div class="modulehead"><span><strong>Módulo ${mi+1}: ${esc(m.title)}</strong><br><small>${esc(m.description||'')}</small></span><small>${(m.contents||[]).filter(x=>x.active!==false).length} conteúdo(s)</small></div>${(m.contents||[]).filter(x=>x.active!==false).sort((a,b)=>a.order-b.order).map(l=>`<div class="lesson"><span>${icon(l.type)} ${esc(l.title)}<br><small>${esc(l.type)} ${l.required!==false&&String(l.type).toLowerCase()!=='simulador'?'• Obrigatório':''}</small></span>${canStudent?`<button class="btn small ${isDone(c,u.id,l.id)?'outline':'secondary'}" onclick="studentOpenContent('${id}','${l.id}')">${isDone(c,u.id,l.id)?'Concluído':'Abrir'}</button>`:''}</div>`).join('')}</div>`).join('')||'<p class="muted">Nenhum módulo cadastrado ainda.</p>';
+  if(canStudent){const st=completionState(c,u);body+=`<div class="panel"><h3>Progresso: ${st.percent}%</h3><div class="progress"><span style="width:${st.percent}%"></span></div>${st.complete?'<p class="notice">Curso concluído. O certificado foi gerado automaticamente.</p><button class="btn primary" onclick="showCertificate(\''+c.id+'\',\''+u.id+'\')">🎓 Abrir certificado</button>':''}</div>`}
+  openModal(c.name,body);kxHydrateAssetImages($('modalBody')).catch(()=>{});
+}
+function syncDraftFields(){
+  if(!_courseDraft)return;const v=id=>$(id)?.value??'';
+  if($('ceName')){_courseDraft.name=v('ceName').trim();_courseDraft.desc=v('ceDesc');_courseDraft.modality=v('ceMod');_courseDraft.hours=v('ceHours');_courseDraft.audience=v('ceAudience');_courseDraft.priceType=v('cePriceType');_courseDraft.price=v('cePrice');const coverInput=$('ceCover');if(coverInput&&coverInput.value.trim())_courseDraft.cover=coverInput.value.trim();else if(coverInput&&String(_courseDraft.cover||'').startsWith('kxasset:')){/* preserve local cover */}else if(coverInput)_courseDraft.cover='';}
+  if($('ceRule')){_courseDraft.completionRule=v('ceRule');_courseDraft.accessType=v('ceAccess');_courseDraft.accessDays=Number(v('ceDays'))||null;_courseDraft.certificateTemplateId=v('ceCert')||'default';}
+  (_courseDraft.modules||[]).forEach((m,i)=>{m.title=$(`dmTitle${i}`)?.value||m.title;m.description=$(`dmDesc${i}`)?.value||'';(m.contents||[]).forEach((x,j)=>{x.title=$(`dcTitle${i}_${j}`)?.value||x.title;x.type=$(`dcType${i}_${j}`)?.value||x.type;x.description=$(`dcDesc${i}_${j}`)?.value||'';const url=$(`dcUrl${i}_${j}`);if(url&&url.value.trim())x.url=url.value.trim();else if(url&&String(x.url||'').startsWith('kxasset:')){/* preserve local content */}else if(url&&String(x.url||'').startsWith('kxsim:')){/* preserve simulator */}else if(url)x.url='';x.required=!!$(`dcReq${i}_${j}`)?.checked;x.finalActivity=!!$(`dcFinal${i}_${j}`)?.checked;});});
+}
+function studentOpenContent(courseId,contentId){
+  const course=db.courses.find(c=>c.id===courseId),user=db.users.find(x=>x.id===db.currentUser),content=activeContents(course||{}).find(c=>c.id===contentId);if(!course||!user||!content)return;if(!canOpenContent(course,content,user)){alert('Este conteúdo está bloqueado.');return}
+  markContentOpened(course,content,user);persist();
+  const type=String(content.type||'').toLowerCase();
+  const finishButton=`<div class="actions" style="margin-top:18px"><button class="btn primary" onclick="completeContent('${course.id}','${content.id}')">${contentProgress(course,user,content)==='completed'?'Concluído':'Marcar como concluído'}</button></div>`;
+  if(String(content.url||'').startsWith('kxasset:')){
+    kxAssetData(content.url).then(src=>{if(!src){alert('O arquivo local associado não foi encontrado.');return}let body='';if(type==='pdf'||type==='material')body=`<iframe src="${src}" style="width:100%;height:620px;border:1px solid #ddd;border-radius:10px"></iframe>`;else if(type==='vídeo'||type==='video')body=`<video controls style="width:100%;max-height:620px;border-radius:10px" src="${src}"></video>`;else if(type==='imagem'||type==='image')body=`<img src="${src}" style="max-width:100%;border-radius:10px">`;else body=`<div class="notice">Arquivo: ${esc(content.url)}</div>`;$('studentArea').innerHTML=`<div class="panel"><button class="btn outline" onclick="renderCourseView('${course.id}')">← Voltar ao curso</button><h2 style="margin-top:18px">${esc(content.title)}</h2><p class="muted">${esc(content.type||'Aula')}</p><p>${esc(content.description||'')}</p>${body}${finishButton}</div>`}).catch(()=>alert('Não foi possível abrir o arquivo local.'));return;
+  }
+  if(type==='simulador'){let stored=String(content.url||'').startsWith('kxsim:'),sid=stored?String(content.url).slice(6):'';$('studentArea').innerHTML=`<div class="panel"><button class="btn outline" onclick="renderCourseView('${course.id}')">← Voltar ao curso</button><h2 style="margin-top:18px">${esc(content.title)}</h2><p>${esc(content.description||'Use a ferramenta prática e depois retorne para concluir o conteúdo.')}</p><button class="btn primary" onclick="${stored?`kxOpenStoredSimulator('${esc(sid)}')`:`openSimulator('${esc(content.url)}')`} ">Abrir simulador</button>${finishButton}</div>`;return}
+  let body=type==='vídeo'||type==='video'?(content.url?`<div class="embed"><iframe src="${esc(content.url)}" title="${esc(content.title)}" allowfullscreen></iframe></div>`:'<div class="notice">Nenhum vídeo foi configurado.</div>'):type==='pdf'||type==='material'?(content.url?`<iframe src="${esc(content.url)}" style="width:100%;height:620px;border:1px solid #ddd;border-radius:10px"></iframe>`:'<div class="notice">Nenhum PDF/material foi configurado.</div>'):`<div class="contentText">${esc(content.description||'Conteúdo da aula.')}</div>`;
+  $('studentArea').innerHTML=`<div class="panel"><button class="btn outline" onclick="renderCourseView('${course.id}')">← Voltar ao curso</button><h2 style="margin-top:18px">${esc(content.title)}</h2><p class="muted">${esc(content.type||'Aula')}</p>${body}${finishButton}</div>`;
+}
+function completeContent(courseId,contentId){
+  const user=db.users.find(x=>x.id===db.currentUser),course=db.courses.find(x=>x.id===courseId);if(!user||!course){alert('Faça login para continuar.');return}const content=activeContents(course).find(c=>c.id===contentId);if(!content)return;if(!canOpenContent(course,content,user)){alert('Este conteúdo ainda está bloqueado.');return}
+  markContentCompleted(course,content,user);const issued=completionState(course,user).complete;persist();renderStudent();renderCourseView(courseId);if(issued){setTimeout(()=>showCertificate(courseId,user.id,true),50)}
+}
+function certModulesText(c){return (c.modules||[]).filter(m=>m.active!==false).sort((a,b)=>(a.order||0)-(b.order||0)).map((m,i)=>`Módulo ${i+1}: ${m.title||'Sem título'} — ${(m.contents||[]).filter(x=>x.active!==false).length} conteúdo(s)`).join('\n')||'Nenhum módulo cadastrado.'}
+function certTemplatePos(t,page,key){return (((t||{}).layout||{})[page]||{})[key]||{x:50,y:50}}
+function certReplace(text,name,c,t,u){const code=certificateCode(c,u);return String(text||'').replaceAll('{{NOME_DO_ALUNO}}',name).replaceAll('{{NOME_DO_CURSO}}',c.name).replaceAll('{{CARGA_HORARIA}}',c.hours||'').replaceAll('{{DATA_CONCLUSAO}}',new Date().toLocaleDateString('pt-BR')).replaceAll('{{CODIGO}}',code).replaceAll('{{MODULOS}}',certModulesText(c))}
+function certDefaultElements(){return {p1:[{id:'title',label:'Título',text:'CERTIFICADO',x:50,y:12,fontSize:38,bold:true,kind:'title'},{id:'text',label:'Texto principal',text:'Certificamos que {{NOME_DO_ALUNO}} concluiu o curso {{NOME_DO_CURSO}}, com carga horária de {{CARGA_HORARIA}}, em {{DATA_CONCLUSAO}}.',x:50,y:56,fontSize:20,bold:false,kind:'text'},{id:'extra',label:'Informações adicionais',text:'Instituto Konnex\nCódigo de verificação: {{CODIGO}}',x:50,y:82,fontSize:15,bold:false,kind:'extra'}],p2:[{id:'p2title',label:'Título da página 2',text:'INFORMAÇÕES DO CURSO',x:50,y:12,fontSize:30,bold:true,kind:'title'},{id:'p2text',label:'Informações dos módulos',text:'Conteúdo programático\n{{MODULOS}}',x:50,y:35,fontSize:18,bold:false,kind:'text'},{id:'p2extra',label:'Informações adicionais da página 2',text:'Informações adicionais do curso',x:50,y:82,fontSize:15,bold:false,kind:'extra'}]}}
+function certEnsureElements(t){
+  if(!(t.elements&&t.elements.p1&&t.elements.p2)){
+    const d=certDefaultElements(),l=t.layout||{};
+    d.p1[0].text=t.title||d.p1[0].text;
+    d.p1[1].text=t.text||d.p1[1].text;
+    d.p1[2].text=t.extra||d.p1[2].text;
+    d.p2[0].text=t.page2Title||d.p2[0].text; d.p2[1].text=t.page2Text||d.p2[1].text; d.p2[2].text=t.page2Extra||d.p2[2].text;
+    [['p1','title',0],['p1','text',1],['p1','extra',2],['p2','title',0],['p2','text',1],['p2','extra',2]].forEach(([pg,key,i])=>{let pos=certTemplatePos(t,pg,key);d[pg][i].x=pos.x;d[pg][i].y=pos.y});
+    t.elements=d;
+  }
+  // O nome faz parte do texto principal do certificado. Não existe uma caixa separada para o nome.
+  let p1=t.elements.p1||[];
+  const oldName=p1.find(el=>el.id==='name'||el.kind==='name');
+  p1=p1.filter(el=>el.id!=='name'&&el.kind!=='name');
+  let textEl=p1.find(el=>el.id==='text');
+  if(!textEl){textEl={id:'text',label:'Texto principal',text:'Certificamos que {{NOME_DO_ALUNO}} concluiu o curso {{NOME_DO_CURSO}}, com carga horária de {{CARGA_HORARIA}}, em {{DATA_CONCLUSAO}}.',x:50,y:56,fontSize:20,bold:false,kind:'text'};p1.push(textEl)}
+  if(!String(textEl.text||'').includes('{{NOME_DO_ALUNO}}')){
+    const base=String(t.text||'');
+    textEl.text=base.includes('{{NOME_DO_ALUNO}}')?base:base.replace(/^Certificamos que\s*/i,'Certificamos que {{NOME_DO_ALUNO}} ');
+    if(!String(textEl.text||'').includes('{{NOME_DO_ALUNO}}')) textEl.text='Certificamos que {{NOME_DO_ALUNO}} '+String(textEl.text||'').trim();
+  }
+  // Mantém a ordem original, com o texto principal no lugar onde estava a antiga caixa do nome.
+  p1.sort((a,b)=>{const order={title:0,text:1,extra:2};return (order[a.id]??3)-(order[b.id]??3)});
+  t.elements.p1=p1;
+  return t.elements;
+}
+function certElementHTML(el,text){let kind=el.kind||'text',cls=kind==='title'?'title':kind==='name'?'name':kind==='extra'?'extra':'text';return `<div class="cert-el ${cls}" style="left:${Number(el.x)||50}%;top:${Number(el.y)||50}%;font-size:${Math.max(8,Number(el.fontSize)||18)}px;font-weight:${el.bold?'700':'400'};text-align:${el.align||'center'}">${esc(text).replace(/\n/g,'<br>')}</div>`}
+function certificateHTML(name,c,t,u){let bg=t.background||'',els=certEnsureElements(t),pages=['p1','p2'].map(pg=>{let body=els[pg].map(el=>certElementHTML(el,certReplace(el.text||'',name,c,t,u))).join('');let bgStyle=bg?`style="background-image:url('${esc(bg)}')"`:'';return `<div class="certificate-page" ${bgStyle}>${body}</div>`}).join('');return `<div class="certificate-pages">${pages}</div><div class="certbar"><button class="btn primary" type="button" onclick="printCertificateView()">Imprimir / Salvar como PDF</button></div>`}
+async function showCertificate(cid,uid,auto){const c=db.courses.find(x=>x.id===cid),u=db.users.find(x=>x.id===uid)||db.users[0];if(!c||!u)return;const t0=db.certTemplates.find(x=>x.id===c.certificateTemplateId)||db.certTemplates[0];const t=JSON.parse(JSON.stringify(t0));if(String(t.background||'').startsWith('kxasset:'))t.background=await kxAssetData(t.background);openModal(auto?'🎓 Certificado gerado automaticamente':'Certificado',certificateHTML(u.name,c,t,u));}
+async function printCertificateView(){
+  const pages=document.querySelectorAll('.certificate-page');
+  if(!pages.length){alert('Certificado não encontrado para gerar o PDF.');return}
+
+  // Carrega as bibliotecas somente quando o usuário solicita o PDF.
+  // O PDF é montado em A4 paisagem e aberto em uma nova aba.
+  async function loadScript(src, test){
+    if(test())return;
+    await new Promise((resolve,reject)=>{
+      const script=document.createElement('script');
+      script.src=src;
+      script.onload=resolve;
+      script.onerror=()=>reject(new Error('Não foi possível carregar a biblioteca de PDF.'));
+      document.head.appendChild(script);
+    });
+  }
+
+  try{
+    const popup=window.open('about:blank','_blank');
+    if(!popup){
+      alert('O navegador bloqueou a abertura do PDF. Permita pop-ups para este site e tente novamente.');
+      return;
+    }
+    popup.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Gerando certificado...</title></head><body style="font-family:Arial;text-align:center;padding:40px">Gerando PDF do certificado...</body></html>');
+    popup.document.close();
+
+    await loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+      ()=>typeof window.html2canvas==='function'
+    );
+    await loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+      ()=>!!window.jspdf?.jsPDF
+    );
+
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({
+      orientation:'landscape',
+      unit:'mm',
+      format:'a4',
+      compress:true
+    });
+
+    for(let i=0;i<pages.length;i++){
+      const page=pages[i];
+
+      // Clona a página para garantir que o PDF tenha exatamente o
+      // tamanho visual do certificado, sem elementos da plataforma.
+      const clone=page.cloneNode(true);
+      clone.style.width='1122px';
+      clone.style.height='794px';
+      clone.style.maxWidth='none';
+      clone.style.aspectRatio='auto';
+      clone.style.margin='0';
+      clone.style.position='fixed';
+      clone.style.left='-10000px';
+      clone.style.top='0';
+      clone.style.transform='none';
+      clone.style.backgroundColor='#fff';
+      clone.style.overflow='hidden';
+      document.body.appendChild(clone);
+
+      try{
+        const canvas=await html2canvas(clone,{
+          scale:2,
+          useCORS:true,
+          allowTaint:false,
+          backgroundColor:'#ffffff',
+          logging:false,
+          width:1122,
+          height:794
+        });
+
+        if(i>0)doc.addPage('a4','landscape');
+        const image=canvas.toDataURL('image/jpeg',0.96);
+        doc.addImage(image,'JPEG',0,0,297,210,undefined,'FAST');
+      }finally{
+        clone.remove();
+      }
+    }
+
+    const blob=doc.output('blob');
+    const pdfUrl=URL.createObjectURL(blob);
+    popup.location.href=pdfUrl;
+    setTimeout(()=>URL.revokeObjectURL(pdfUrl),120000);
+  }catch(error){
+    console.error(error);
+    try{popup?.close()}catch(e){}
+    alert('Não foi possível gerar o PDF. Verifique sua conexão com a internet e tente novamente.');
+  }
+}
+
+function printCertificate(code){const v=(db.users.flatMap(u=>u.certificates||[])).find(x=>x.code===code);if(v){showCertificate(v.courseId,v.userId)}else alert('Certificado não encontrado.')}
+function certTemplateEditor(id){
+  let t=id?db.certTemplates.find(x=>x.id===id):{id:uid('tpl'),name:'Novo modelo',title:'CERTIFICADO',text:'Certificamos que {{NOME_DO_ALUNO}} concluiu o curso {{NOME_DO_CURSO}}, com carga horária de {{CARGA_HORARIA}}, em {{DATA_CONCLUSAO}}.',extra:'Instituto Konnex\nCódigo: {{CODIGO}}',page2Title:'INFORMAÇÕES DO CURSO',page2Text:'Conteúdo programático\n{{MODULOS}}',page2Extra:'Informações adicionais do curso',background:''};
+  certEnsureElements(t);if(!id)window._kxCertEditorTemp=t;const c=db.courses[0]||{name:'Curso de exemplo',hours:'20 horas',modules:[]};const bg=t.background&&!String(t.background).startsWith('kxasset:')?t.background:'';
+  openModal(id?'Editar modelo':'Novo modelo',`<div class="field"><label>Nome do modelo</label><input id="ctName" value="${esc(t.name)}"></div><div class="field"><label>Imagem de fundo</label><div class="actions"><label class="btn outline" style="cursor:pointer">Adicionar imagem do computador<input id="ctBgFile" type="file" accept="image/*" hidden onchange="kxHandleCertBackground(this,'${t.id}')"></label>${t.background?`<button class="btn small danger" onclick="$('ctBg').value='';saveCertTemplate('${t.id}',${!!id})">Remover fundo</button>`:''}</div><input id="ctBg" value="${esc(bg)}" placeholder="Ou informe a URL da imagem"></div><div class="notice">Selecione uma caixa de texto para editar seu conteúdo e tamanho. Você também pode criar novas caixas e arrastá-las livremente dentro de cada página.</div><div class="actions"><button id="certPageBtn1" class="btn primary" onclick="certEditorPage('p1')">Página 1 — Certificado</button><button id="certPageBtn2" class="btn outline" onclick="certEditorPage('p2')">Página 2 — Informações</button></div><div id="certEditorArea"></div><div class="actions" style="margin-top:15px"><button class="btn primary" onclick="saveCertTemplate('${t.id}',${!!id})">Salvar modelo</button><button class="btn outline" onclick="certEditorPreview('${t.id}')">Visualizar</button></div>`);
+  window._kxCertEditorId=t.id;window._kxCertEditorPage='p1';window._kxCertEditorCourse=c;window._kxCertSelected=null;setTimeout(()=>certEditorPage('p1'),0);
+}
+function certEditorPage(page){const id=window._kxCertEditorId,t=db.certTemplates.find(x=>x.id===id)||window._kxCertEditorTemp;if(!t)return;certEnsureElements(t);window._kxCertEditorPage=page;window._kxCertSelected=null;const c=window._kxCertEditorCourse||db.courses[0]||{name:'Curso de exemplo',hours:'20 horas',modules:[]};let bg=t.background||'',arr=t.elements[page]||[];let html=`<div class="cert-editor-note">Clique em uma caixa para selecioná-la. Edite o texto, tamanho e alinhamento abaixo. Arraste a caixa para posicioná-la.</div><div id="certDragCanvas" class="cert-editor-canvas" ${bg?`style="background-image:url('${esc(bg)}')"`:''}>${arr.map(el=>certEditorElementHTML(el,c)).join('')}</div><div class="cert-editor-tools"><div class="cert-editor-box"><div class="actions" style="justify-content:space-between"><strong>Caixas de texto</strong><button class="btn small primary" onclick="certAddTextBox()">+ Nova caixa de texto</button></div><div id="certElementList" class="cert-editor-list" style="margin-top:10px">${arr.map(el=>`<button class="btn small outline ${window._kxCertSelected===el.id?'active':''}" onclick="certSelectElement('${el.id}')">${esc(el.label||'Texto')}</button>`).join('')}</div></div><div class="cert-editor-box" id="certElementControls"><div class="mini">Selecione uma caixa de texto para editar.</div></div></div>`;document.getElementById('certEditorArea').innerHTML=html;document.getElementById('certPageBtn1').className='btn '+(page==='p1'?'primary':'outline');document.getElementById('certPageBtn2').className='btn '+(page==='p2'?'primary':'outline');document.querySelectorAll('#certDragCanvas .cert-el').forEach(el=>{el.onpointerdown=certDragStart});}
+function certEditorElementHTML(el,c){let preview=el.text;if(el.id==='name')preview='Nome do aluno';return `<div class="cert-el ${el.kind==='title'?'title':el.kind==='name'?'name':el.kind==='extra'?'extra':'text'}" data-key="${esc(el.id)}" style="left:${Number(el.x)||50}%;top:${Number(el.y)||50}%;font-size:${Math.max(8,Number(el.fontSize)||18)}px;font-weight:${el.bold?'700':'400'};text-align:${el.align||'center'}">${esc(certReplace(preview,'Nome do aluno',c,{elements:{}},{id:'preview'})).replace(/\n/g,'<br>')}</div>`}
+function certSelectElement(id){window._kxCertSelected=id;certEditorPage(window._kxCertEditorPage);const t=db.certTemplates.find(x=>x.id===window._kxCertEditorId)||window._kxCertEditorTemp;let el=(t.elements[window._kxCertEditorPage]||[]).find(x=>x.id===id);if(!el)return;const c=window._kxCertEditorCourse||db.courses[0]||{name:'Curso de exemplo',hours:'20 horas',modules:[]};let controls=`<div class="field"><label>Nome da caixa</label><input id="ceLabel" value="${esc(el.label||'Texto')}" oninput="certUpdateSelected()"></div><div class="field"><label>Texto</label><textarea id="ceText" oninput="certUpdateSelected()">${esc(el.text||'')}</textarea><small class="mini">Você pode usar {{NOME_DO_ALUNO}}, {{NOME_DO_CURSO}}, {{CARGA_HORARIA}}, {{DATA_CONCLUSAO}}, {{CODIGO}} e {{MODULOS}}.</small></div><div class="two"><div class="field"><label>Tamanho da fonte (px)</label><input id="ceSize" type="number" min="8" max="120" value="${Number(el.fontSize)||18}" oninput="certUpdateSelected()"></div><div class="field"><label>Alinhamento</label><select id="ceAlign" onchange="certUpdateSelected()"><option value="left" ${el.align==='left'?'selected':''}>Esquerda</option><option value="center" ${(!el.align||el.align==='center')?'selected':''}>Centro</option><option value="right" ${el.align==='right'?'selected':''}>Direita</option></select></div></div><div class="checkline"><input id="ceBold" type="checkbox" ${el.bold?'checked':''} onchange="certUpdateSelected()"><span>Negrito</span></div><div class="actions"><button class="btn small danger" onclick="certDeleteSelected()">Excluir caixa</button></div>`;$('certElementControls').innerHTML=controls;let canvas=$('certDragCanvas');canvas?.querySelector(`[data-key="${CSS.escape(id)}"]`)?.classList.add('selected');}
+function certUpdateSelected(){const t=db.certTemplates.find(x=>x.id===window._kxCertEditorId)||window._kxCertEditorTemp;if(!t)return;const el=(t.elements[window._kxCertEditorPage]||[]).find(x=>x.id===window._kxCertSelected);if(!el)return;el.label=$('ceLabel')?.value||'Texto';el.text=$('ceText')?.value||'';el.fontSize=Math.max(8,Math.min(120,Number($('ceSize')?.value)||18));el.align=$('ceAlign')?.value||'center';el.bold=!!$('ceBold')?.checked;const node=$('certDragCanvas')?.querySelector(`[data-key="${CSS.escape(el.id)}"]`);if(node){node.style.fontSize=el.fontSize+'px';node.style.textAlign=el.align;node.style.fontWeight=el.bold?'700':'400';node.innerHTML=esc(certReplace(el.text,'Nome do aluno',window._kxCertEditorCourse||db.courses[0]||{name:'Curso de exemplo',hours:'20 horas',modules:[]},t,{id:'preview'})).replace(/\n/g,'<br>')}}
+function certAddTextBox(){const t=db.certTemplates.find(x=>x.id===window._kxCertEditorId)||window._kxCertEditorTemp;if(!t)return;certEnsureElements(t);let page=window._kxCertEditorPage,arr=t.elements[page]||[];let n=arr.length+1;let el={id:'text_'+Date.now().toString(36),label:'Nova caixa '+n,text:'Novo texto',x:50,y:50,fontSize:18,bold:false,align:'center',kind:'text'};arr.push(el);t.elements[page]=arr;window._kxCertSelected=el.id;certEditorPage(page);setTimeout(()=>certSelectElement(el.id),0)}
+function certDeleteSelected(){const t=db.certTemplates.find(x=>x.id===window._kxCertEditorId)||window._kxCertEditorTemp;if(!t||!window._kxCertSelected)return;let arr=t.elements[window._kxCertEditorPage]||[];if(arr.length<=1){alert('A página precisa ter pelo menos uma caixa de texto.');return}t.elements[window._kxCertEditorPage]=arr.filter(x=>x.id!==window._kxCertSelected);window._kxCertSelected=null;certEditorPage(window._kxCertEditorPage)}
+function certDragStart(e){e.preventDefault();const el=e.currentTarget,canvas=el.parentElement,id=el.dataset.key,t=db.certTemplates.find(x=>x.id===window._kxCertEditorId)||window._kxCertEditorTemp;if(!t)return;window._kxCertSelected=id;const move=ev=>{const r=canvas.getBoundingClientRect(),obj=(t.elements[window._kxCertEditorPage]||[]).find(x=>x.id===id);if(!obj)return;let x=Math.max(2,Math.min(98,(ev.clientX-r.left)/r.width*100)),y=Math.max(2,Math.min(98,(ev.clientY-r.top)/r.height*100));el.style.left=x+'%';el.style.top=y+'%';obj.x=Number(x.toFixed(2));obj.y=Number(y.toFixed(2));el.classList.add('selected')};const up=()=>{document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',up)};document.addEventListener('pointermove',move);document.addEventListener('pointerup',up);}
+function certSyncEditorFields(){const t=db.certTemplates.find(x=>x.id===window._kxCertEditorId)||window._kxCertEditorTemp;if(!t)return;certEnsureElements(t);const p=t.elements;let f1=p.p1.find(x=>x.id==='title'),f2=p.p1.find(x=>x.id==='name'),f3=p.p1.find(x=>x.id==='text'),f4=p.p1.find(x=>x.id==='extra'),g1=p.p2.find(x=>x.id==='p2title'),g2=p.p2.find(x=>x.id==='p2text'),g3=p.p2.find(x=>x.id==='p2extra');if(f1)t.title=f1.text;if(f3)t.text=f3.text;if(f4)t.extra=f4.text;if(g1)t.page2Title=g1.text;if(g2)t.page2Text=g2.text;if(g3)t.page2Extra=g3.text;t.layout={p1:{},p2:{}};p.p1.forEach(x=>{t.layout.p1[x.id==='p2title'?'title':x.id==='p2text'?'text':x.id==='p2extra'?'extra':x.id]={x:x.x,y:x.y}});p.p2.forEach(x=>{let k=x.id==='p2title'?'title':x.id==='p2text'?'text':x.id==='p2extra'?'extra':x.id;t.layout.p2[k]={x:x.x,y:x.y}})}
+async function certEditorPreview(id){certSyncEditorFields();const t=db.certTemplates.find(x=>x.id===id)||window._kxCertEditorTemp;if(!t)return;let c=db.courses[0]||{name:'Curso de exemplo',hours:'20 horas',modules:[]},copy=JSON.parse(JSON.stringify(t));if(String(copy.background||'').startsWith('kxasset:'))copy.background=await kxAssetData(copy.background);openModal('Pré-visualização do certificado',certificateHTML('Nome do aluno',c,copy,{id:'preview'}));}
+function saveCertTemplate(id,existing){certSyncEditorFields();const old=db.certTemplates.find(x=>x.id===id)||window._kxCertEditorTemp||{};let bg=$('ctBg')?.value.trim();if(!bg&&String(old.background||'').startsWith('kxasset:'))bg=old.background;let t={id,name:$('ctName').value.trim(),title:old.title||'CERTIFICADO',text:old.text||'',extra:old.extra||'',page2Title:old.page2Title||'INFORMAÇÕES DO CURSO',page2Text:old.page2Text||'Conteúdo programático\n{{MODULOS}}',page2Extra:old.page2Extra||'',background:bg||'',layout:old.layout||{},elements:old.elements||certDefaultElements()};if(!t.name){alert('Informe o nome do modelo.');return}if(existing){const i=db.certTemplates.findIndex(x=>x.id===id);if(i>=0)db.certTemplates[i]=t}else db.certTemplates.push(t);persist();closeModal();adminTab('cert')}
+
+function studentsAdmin(){return `<div class="section"><div><h2>Alunos</h2><p class="muted">Cadastre alunos para testes ou acompanhe os usuários criados pelo próprio cadastro.</p></div><button class="btn primary" onclick="adminCreateStudent()">+ Novo aluno</button></div><table class="table"><tr><th>Nome</th><th>E-mail</th><th>Cursos</th><th>Progresso</th><th>Certificados</th><th>Ações</th></tr>${db.users.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${(u.courses||[]).length}</td><td>${(u.courses||[]).map(id=>{let c=db.courses.find(x=>x.id===id);return c?`${esc(c.name)}: ${currentProgress(c,u.id)}%`:''}).filter(Boolean).join('<br>')}</td><td>${(u.certificates||[]).length}</td><td>${(u.courses||[]).map(id=>{let c=db.courses.find(x=>x.id===id);return c&&c.completionRule==='manual'?`<button class="btn small secondary" onclick="toggleManualCompletion('${u.id}','${c.id}')">${u.progress?.[c.id]?.manualComplete?'Reabrir':'Concluir'}</button>`:''}).filter(Boolean).join(' ')||'—'}</td></tr>`).join('')}</table>`}
+function adminCreateStudent(){openModal('Novo aluno',`<div class="field"><label>Nome completo</label><input id="asName"></div><div class="field"><label>E-mail</label><input id="asEmail" type="email"></div><div class="two"><div class="field"><label>Senha</label><input id="asPass" type="password"></div><div class="field"><label>Confirmar senha</label><input id="asPass2" type="password"></div></div><button class="btn primary" onclick="saveAdminStudent()">Criar aluno</button>`)}
+function saveAdminStudent(){const name=$('asName').value.trim(),email=kxSafeEmail($('asEmail').value),pass=$('asPass').value,pass2=$('asPass2').value;if(name.length<3||!/^\S+@\S+\.\S+$/.test(email)){alert('Informe nome e e-mail válidos.');return}if(pass.length<6||pass!==pass2){alert('Confira a senha. Ela deve ter pelo menos 6 caracteres.');return}if(kxFindUserByEmail(email)){alert('Já existe um usuário com este e-mail.');return}db.users.push({id:uid('user'),name,email,password:pass,role:'student',createdAt:nowISO(),enrollments:[],courses:[],progress:{},certificates:[]});persist();closeModal();adminTab('students')}
+function renderStudent(){const p=$('studentArea');if(!p)return;const u=db.users.find(x=>x.id===db.currentUser);if(!u){p.innerHTML=`<div class="panel"><h2>Área do aluno</h2><p class="muted">Entre com seu acesso ou crie sua conta.</p><button class="btn primary" onclick="go('login')">Entrar</button></div>`;return}const enrolled=(u.enrollments||[]).map(e=>db.courses.find(c=>c.id===e.courseId)).filter(Boolean);const cards=enrolled.map(c=>{const st=completionState(c,u),e=getEnrollment(u,c),expired=e&&e.expiresAt&&parseDate(e.expiresAt)&&parseDate(e.expiresAt)<new Date();return `<div class="card"><div class="cover">${c.cover?(String(c.cover).startsWith('kxasset:')?`<img data-kx-asset="${esc(c.cover.slice(8))}" alt="Capa">`:`<img src="${esc(c.cover)}" alt="Capa">`):'CAPA DO CURSO'}</div><h3>${esc(c.name)}</h3><p class="muted">${esc(c.desc||'')}</p><div class="progress"><span style="width:${st.percent}%"></span></div><p>${st.percent}% concluído ${expired?'<span class="badge danger">Acesso expirado</span>':''}</p><button class="btn primary" onclick="openCourseForStudent('${c.id}')">${st.complete?'Ver certificado':'Continuar'}</button></div>`}).join('');p.innerHTML=`<div class="panel"><div class="actions" style="justify-content:space-between"><div><h2>Área do aluno</h2><p class="muted">Bem-vindo, ${esc(u.name)}.</p><p class="muted">Acesso: ${esc(u.email)}</p></div><button class="btn outline" onclick="logout()">Sair</button></div>${cards||'<div class="notice">Você ainda não possui cursos matriculados. Acesse o catálogo para se inscrever.</div>'}<div class="panel" style="margin-top:15px"><h3>Certificados</h3>${(u.certificates||[]).map(v=>`<div class="row"><span>${esc((db.courses.find(x=>x.id===v.courseId)||{}).name||'Curso')}<br><small class="muted">${esc(v.code)}</small></span><button class="btn small" onclick="printCertificate('${v.code}')">Abrir certificado</button></div>`).join('')||'<p class="muted">Nenhum certificado emitido.</p>'}</div></div>`;kxHydrateAssetImages(p).catch(()=>{})}
+
+
+/* ===== Konnex Online / Supabase ===== */
+(function(){
+  const KX_URL='https://dftoqicsucoymwrzbhvx.supabase.co';
+  const KX_KEY='sb_publishable_zhvYWuB5duFxgJMDGoB_vQ_F40Wq8Nc';
+  if(!window.supabase?.createClient){
+    console.error('Supabase JS não foi carregado.');
+    return;
+  }
+  const kxClient=window.supabase.createClient(KX_URL,KX_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+  window.kxSupabase=kxClient;
+  window.KX_ONLINE=true;
+  let kxSyncing=false;
+  let kxBooting=true;
+
+  function kxUserFromProfile(p){
+    return {id:p.id,name:p.name||'',email:p.email||'',role:p.role||'student',createdAt:p.created_at||nowISO(),enrollments:[],courses:[],progress:{},certificates:[]};
+  }
+  function kxMergeProfileUsers(profiles){
+    db.users=(profiles||[]).map(kxUserFromProfile);
+    if(!db.users.length && db.currentUser){db.users=[{id:db.currentUser,name:'',email:'',role:'student',enrollments:[],courses:[],progress:{},certificates:[]}];}
+  }
+  async function kxLoadRemote(){
+    const {data:{session}}=await kxClient.auth.getSession();
+    const [settingsR,coursesR,faqsR]=await Promise.all([
+      kxClient.from('platform_settings').select('*').eq('id',true).maybeSingle(),
+      kxClient.from('courses').select('*'),
+      kxClient.from('faqs').select('*').order('id')
+    ]);
+    if(settingsR.data?.data)db.settings={...db.settings,...settingsR.data.data};
+    if(coursesR.data)db.courses=coursesR.data.map(r=>normalizeCourse({...r.data,id:r.id,status:r.status,archived:r.archived,updatedAt:r.updated_at,createdAt:r.created_at}));
+    if(faqsR.data)db.faqs=faqsR.data.map(r=>r.data||{});
+
+    if(session){
+      const {data:profile}=await kxClient.from('profiles').select('*').eq('id',session.user.id).maybeSingle();
+      const isAdmin=profile?.role==='admin';
+      db.currentUser=isAdmin?null:session.user.id;
+      db.adminSession=isAdmin;
+      const profiles= isAdmin
+        ? (await kxClient.from('profiles').select('*').order('created_at')).data||[]
+        : profile?[profile]:[];
+      kxMergeProfileUsers(profiles);
+      if(!isAdmin && profile){
+        const u=db.users.find(x=>x.id===session.user.id)||kxUserFromProfile(profile);
+        if(!db.users.some(x=>x.id===u.id))db.users.push(u);
+        u.email=session.user.email||u.email;
+      }
+      const [enR,prR,ceR,ctR]=await Promise.all([
+        kxClient.from('enrollments').select('*'),
+        kxClient.from('progress').select('*'),
+        kxClient.from('certificates').select('*'),
+        kxClient.from('cert_templates').select('*').order('id')
+      ]);
+      (enR.data||[]).forEach(r=>{const u=db.users.find(x=>x.id===r.user_id);if(!u)return;u.enrollments.push({courseId:r.course_id,status:r.status,enrolledAt:r.enrolled_at,expiresAt:r.expires_at});u.courses=Array.from(new Set([...(u.courses||[]),r.course_id]));});
+      (prR.data||[]).forEach(r=>{const u=db.users.find(x=>x.id===r.user_id);if(!u)return;u.progress=u.progress||{};u.progress[r.course_id]=r.data||{};u.progress[r.course_id].completed=u.progress[r.course_id].completed||[];u.progress[r.course_id].opened=u.progress[r.course_id].opened||[];});
+      (ceR.data||[]).forEach(r=>{const u=db.users.find(x=>x.id===r.user_id);if(!u)return;u.certificates=u.certificates||[];u.certificates.push({code:r.code,courseId:r.course_id,userId:r.user_id,issuedAt:r.issued_at,...(r.data||{})});});
+      if(ctR.data?.length)db.certTemplates=ctR.data.map(r=>({id:r.id,...(r.data||{})}));
+    }else{
+      db.users=[];db.currentUser=null;db.adminSession=false;
+    }
+  }
+
+  async function kxSyncCurrent(){
+    if(kxBooting||kxSyncing)return;
+    const {data:{session}}=await kxClient.auth.getSession();
+    if(!session)return;
+    const uid=session.user.id;
+    const isAdmin=db.adminSession;
+    kxSyncing=true;
+    try{
+      if(isAdmin){
+        for(const c of db.courses||[]){
+          await kxClient.from('courses').upsert({id:c.id,data:c,status:c.status||'Rascunho',archived:!!c.archived,updated_at:nowISO()});
+        }
+        await kxClient.from('platform_settings').upsert({id:true,data:db.settings||{},updated_at:nowISO()});
+        await kxClient.from('faqs').delete().neq('id',-1);
+        if((db.faqs||[]).length)await kxClient.from('faqs').insert(db.faqs.map(f=>({data:f,updated_at:nowISO()})));
+        for(const t of db.certTemplates||[]){
+          await kxClient.from('cert_templates').upsert({id:t.id,data:t,updated_at:nowISO()});
+        }
+      }
+      const targets=isAdmin?(db.users||[]):(db.users||[]).filter(x=>x.id===uid);
+      for(const u of targets){
+        await kxClient.from('profiles').update({name:u.name||'',updated_at:nowISO()}).eq('id',u.id);
+        for(const e of u.enrollments||[]){
+          await kxClient.from('enrollments').upsert({user_id:u.id,course_id:e.courseId,status:e.status||'active',enrolled_at:e.enrolledAt||nowISO(),expires_at:e.expiresAt||null},{onConflict:'user_id,course_id'});
+        }
+        for(const [courseId,data] of Object.entries(u.progress||{})){
+          await kxClient.from('progress').upsert({user_id:u.id,course_id:courseId,data:data||{},updated_at:nowISO()},{onConflict:'user_id,course_id'});
+        }
+        for(const cert of u.certificates||[]){
+          await kxClient.from('certificates').upsert({code:cert.code,user_id:u.id,course_id:cert.courseId,issued_at:cert.issuedAt||nowISO(),data:cert},{onConflict:'code'});
+          const course=db.courses.find(c=>c.id===cert.courseId);
+          await kxClient.from('certificate_validation').upsert({code:cert.code,student_name:u.name||'',course_name:course?.name||'Curso',issued_at:cert.issuedAt||nowISO(),hours:course?.hours||'',data:{code:cert.code}},{onConflict:'code'});
+        }
+      }
+    }finally{ kxSyncing=false; }
+  }
+
+  // Mantém o cache local para funcionamento rápido, mas a fonte de dados passa a ser o Supabase.
+  const localPersist=window.persist;
+  window.persist=function(){
+    localStorage.setItem(KEY,JSON.stringify(db));
+    render();
+    kxSyncCurrent().catch(e=>console.error('Falha ao sincronizar Konnex:',e));
+  };
+
+  window.login=async function(){
+    const email=kxSafeEmail($('loginEmail')?.value),pass=$('loginPassword')?.value||'';
+    if(!/^\S+@\S+\.\S+$/.test(email)||!pass){alert('Informe e-mail e senha.');return}
+    const {error}=await kxClient.auth.signInWithPassword({email,password:pass});
+    if(error){alert('E-mail ou senha incorretos.');return}
+    await kxLoadRemote();render();go(db.adminSession?'admin':'student');
+  };
+
+  window.finishStudentRegistration=async function(){
+    const name=$('regName')?.value.trim()||'',email=kxSafeEmail($('regEmail')?.value),pass=$('regPassword')?.value||'',pass2=$('regPassword2')?.value||'',terms=!!$('regTerms')?.checked;
+    if(name.length<3){alert('Informe seu nome completo.');return}
+    if(!/^\S+@\S+\.\S+$/.test(email)){alert('Informe um e-mail válido.');return}
+    if(pass.length<6){alert('A senha deve ter pelo menos 6 caracteres.');return}
+    if(pass!==pass2){alert('As senhas não conferem.');return}
+    if(!terms){alert('Aceite a confirmação para criar a conta.');return}
+    const {data,error}=await kxClient.auth.signUp({email,password:pass,options:{data:{name}}});
+    if(error){alert(error.message||'Não foi possível criar a conta.');return}
+    $('regName').value='';$('regEmail').value='';$('regPassword').value='';$('regPassword2').value='';$('regTerms').checked=false;
+    if(data.session){await kxLoadRemote();const pending=kxPendingEnrollment;kxPendingEnrollment=null;if(pending){const u=db.users.find(x=>x.id===data.user.id);if(u)kxEnrollAndOpen(pending,u)}render();go('student');}
+    else{alert('Conta criada. Verifique seu e-mail para confirmar a conta e depois entre na plataforma.');go('login');}
+  };
+
+  window.recoverStudentPassword=async function(){
+    const email=kxSafeEmail($('forgotEmail')?.value),pass=$('forgotPasswordNew')?.value||'',pass2=$('forgotPasswordConfirm')?.value||'';
+    const {data:{session}}=await kxClient.auth.getSession();
+    if(session){
+      if(pass.length<6){alert('A nova senha deve ter pelo menos 6 caracteres.');return}
+      if(pass!==pass2){alert('A confirmação da nova senha não confere.');return}
+      const {error}=await kxClient.auth.updateUser({password:pass});
+      if(error){alert(error.message||'Não foi possível alterar a senha.');return}
+      $('forgotEmail').value='';$('forgotPasswordNew').value='';$('forgotPasswordConfirm').value='';alert('Senha alterada com sucesso.');go('login');return;
+    }
+    if(!/^\S+@\S+\.\S+$/.test(email)){alert('Informe um e-mail válido.');return}
+    const {error}=await kxClient.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname+'#forgotPassword'});
+    if(error){alert(error.message||'Não foi possível enviar o e-mail.');return}
+    alert('Enviamos um link para redefinição da senha. Verifique seu e-mail.');
+  };
+
+  window.logout=async function(){await kxClient.auth.signOut();db.currentUser=null;db.adminSession=false;db.users=[];render();go('home');};
+
+  window.saveProfile=async function(){
+    const u=db.users.find(x=>x.id===db.currentUser);if(!u)return;
+    const name=$('pname').value.trim()||u.name;const {error}=await kxClient.from('profiles').update({name,updated_at:nowISO()}).eq('id',u.id);
+    if(error){alert('Não foi possível salvar o perfil.');return}u.name=name;persist();go('student');
+  };
+
+  window.enroll=async function(courseId){
+    const course=db.courses.find(x=>x.id===courseId);if(!course)return;
+    if(course.status!=='Publicado'||course.archived){alert('Este curso ainda não está disponível.');return}
+    let u=db.users.find(x=>x.id===db.currentUser);
+    if(!u){kxPendingEnrollment=courseId;registerStudent(courseId);return}
+    if(getEnrollment(u,course)&&isEnrollmentActive(u,course)){alert('Você já está matriculado neste curso.');go('student');return}
+    if(getEnrollment(u,course)?.status==='blocked'){alert('Sua matrícula está bloqueada.');return}
+    const e=ensureEnrollment(u,course);e.status='active';e.enrolledAt=e.enrolledAt||nowISO();e.expiresAt=course.accessType==='period'?daysFromNow(course.accessDays||30):null;
+    if(!u.courses.includes(course.id))u.courses.push(course.id);
+    const {error}=await kxClient.from('enrollments').upsert({user_id:u.id,course_id:course.id,status:e.status,enrolled_at:e.enrolledAt,expires_at:e.expiresAt},{onConflict:'user_id,course_id'});
+    if(error){alert('Não foi possível registrar a matrícula.');return}
+    persist();alert(course.priceType==='paid'?'Matrícula registrada. O pagamento ainda não está integrado nesta versão.':'Matrícula realizada com sucesso.');go('student');
+  };
+
+  // O cadastro de aluno pelo administrador não cria senhas no navegador. O aluno deve usar o próprio cadastro.
+  window.saveAdminStudent=async function(){alert('Para manter as senhas seguras, novos alunos devem criar a própria conta pela opção “Criar minha conta de aluno”. O administrador poderá acompanhar o cadastro pelo painel.');};
+
+  // Validação pública usa a tabela segura do Supabase.
+  window.validateCert=async function(){
+    const code=$('validationCode')?.value.trim();if(!code){$('validationResult').innerHTML='<div class="notice">Digite um código.</div>';return}
+    const {data,error}=await kxClient.from('certificate_validation').select('code,student_name,course_name,issued_at,hours').eq('code',code).maybeSingle();
+    if(error){$('validationResult').innerHTML='<div class="notice" style="background:#fff1ef;color:#8e3027">Não foi possível consultar a validação agora.</div>';return}
+    $('validationResult').innerHTML=data?`<div class="notice"><b>Certificado válido.</b><br>Aluno: ${esc(data.student_name)}<br>Curso: ${esc(data.course_name)}<br>Carga horária: ${esc(data.hours||'-')}<br>Conclusão: ${esc(new Date(data.issued_at).toLocaleDateString('pt-BR'))}</div>`:'<div class="notice" style="background:#fff1ef;color:#8e3027">Certificado não encontrado.</div>';
+  };
+
+  kxClient.auth.onAuthStateChange(async(event)=>{
+    if(event==='PASSWORD_RECOVERY'){setTimeout(()=>go('forgotPassword'),0);return}
+    if(event==='SIGNED_OUT'){db.currentUser=null;db.adminSession=false;render();return}
+    if(event==='SIGNED_IN'&&!kxBooting){await kxLoadRemote();render();}
+  });
+
+  (async()=>{
+    try{
+      await kxLoadRemote();
+      kxBooting=false;
+      localStorage.setItem(KEY,JSON.stringify(db));
+      render();
+      if(db.adminSession)go('admin'); else if(db.currentUser)go('student');
+    }catch(e){
+      console.error('Konnex online boot:',e);
+      kxBooting=false;
+      render();
+      alert('A plataforma abriu, mas não conseguiu carregar o banco online. Verifique sua conexão com a internet.');
+    }
+  })();
+})();
+
+</script>
+</body>
+</html>
